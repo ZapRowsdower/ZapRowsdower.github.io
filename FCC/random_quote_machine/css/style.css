@@ -1,0 +1,47 @@
+body {
+  background-attachment: fixed;
+  background-size: cover;
+  -webkit-transition: background-image 3s, color 2s;
+  transition: background-image 3s, color 2s;
+}
+
+.container-quote {
+  margin: 5% 0 0 auto;
+  font-family: 'Marcellus SC', serif;
+}
+
+.quote-text {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 2%;
+  text-align: center;
+}
+
+.quote-author {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.by {
+  margin-top: 5%;
+}
+.by a {
+  color: #ccc;
+}
+
+.preload {
+  display: none;
+  background: url(https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13474940_10207032179978446_7857208768475106145_o.jpg) no-repeat -9999px -9999px, url(https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13443057_10207032179338430_8034999766599052217_o.jpg) no-repeat -9999px -9999px, url(https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13412189_10207032180138450_454572012004838220_o.jpg) no-repeat -9999px -9999px, url(https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13443057_10207032179338430_8034999766599052217_o.jpg) no-repeat -9999px -9999px, url(https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13443092_10207032228579661_4147038425955037306_o.jpg) no-repeat -9999px -9999px;
+}
+
+#btnNextQuote {
+  -webkit-transition: background-color 2s;
+  transition: background-color 2s;
+  border-radius: 0;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1%;
+  font-size: 18px;
+}
