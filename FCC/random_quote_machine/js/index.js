@@ -61,7 +61,7 @@ var quotes = [
     "quote":"Sometimes it takes a great sky to find that first, bright and indescribable wedge of freedom in your own heart"
   },
   {
-    "author":"HORACE KEPHART",
+    "author":"Horace Kephart",
     "quote":"This instinct for a free life in the open is as natural and wholesome as the gratification of hunger and thirst and love. It is Nature’s recall to the simple mode of existence she intended us for."
   },
   {
@@ -111,22 +111,6 @@ styles = [
     "buttonStyle":{
       "background-color":"rgba(255, 255, 255,0.1)",
       "color":"#efefef"
-    }
-  },
-  {
-    "background-image": "url("+images[3]+")",
-    "color":"#ddd",
-    "buttonStyle":{
-      "background-color":"rgba(255, 255, 255,0.1)",
-      "color":"#efefef"
-    }
-  },
-  {
-    "background-image": "url("+images[4]+")",
-    "color":"#36060F",
-    "buttonStyle":{
-      "background-color":"rgba(144,124,124,0.5)",
-      "color":"#fff"
     }
   }
 ],
