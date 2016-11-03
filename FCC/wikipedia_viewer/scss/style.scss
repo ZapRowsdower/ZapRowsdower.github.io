@@ -1,0 +1,143 @@
+$text: 1.4em;
+$bigText: 1.5em;
+$superBigText: 4em;
+$fontColor: #fff;
+$fontColor2: #999;
+$bgColor: #4c4c5f;
+$bgColor2: #343436;
+$blueGreenGlow: #00e8ff;
+$buttonBgColor: #000;
+$hoverBgColor: #0cf;
+$linkColor: $hoverBgColor;
+$headerFont: "Linux Libertine",
+Georgia,
+Times,
+serif;
+body {
+  background-color: $bgColor;
+}
+
+header {
+  background-color: $buttonBgColor;
+  cursor: pointer;
+  h1 {
+    margin-top: 0;
+    padding: 1%;
+    font-family: $headerFont;
+    font-size: $bigText;
+    color: $fontColor;
+  }
+}
+
+button {
+  border: none;
+  background-color: $buttonBgColor;
+  color: $fontColor;
+  &:hover {
+    box-shadow: 0 0 0.5em $hoverBgColor;
+    background-color: $hoverBgColor;
+    color: $fontColor;
+  }
+}
+footer {
+  color: $fontColor2;
+  a {
+    color: $linkColor;
+    &:hover {
+      color: $hoverBgColor;
+    }
+  }
+}
+.main {
+  margin-top: 3%;
+  font-size: $text;
+  a,
+  li {
+    color: $linkColor;
+  }
+  li {
+    margin: 1%;
+    list-style-type: square;
+  }
+}
+.splash-screen {
+  font-family: "Oswald", sans-serif;
+}
+.divider{
+  h2 {
+  font-size: $superBigText;
+  margin-top: 0;
+  color: $fontColor2;
+  }
+}
+.pane {
+  cursor: pointer;
+  color: $fontColor;
+  font-size: $bigText;
+  padding: 1%;
+  i {
+    font-size: $superBigText;
+    margin-top: 0 auto;
+  }
+  &:hover, &:active{
+    box-shadow: 0 0 0.5em $hoverBgColor;
+    background-color: $hoverBgColor;
+  }
+}
+.my-loader {
+  margin: 0 auto;
+  border-radius: 50%;
+  border-left: 0.4em solid rgba(0, 232, 255, 0.8);
+  border-right: 0.4em solid rgba(0, 232, 255, 0.2);
+  border-bottom: 0.4em solid rgba(0, 232, 255, 0.4);
+  border-top: 0.4em solid $fontColor;
+  box-shadow: 0 0 0.5em $hoverBgColor;
+  width: 8em;
+  height: 8em;
+  transform: rotate(90deg);
+  animation: spin 0.5s infinite linear
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.search, .results {
+  margin-bottom: 4%;
+  font-family: "Lato", sans-serif;
+}
+
+.results {
+  h3 {
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
+  }
+  a {
+      text-decoration: none;
+  }
+  li {
+    margin-left: -1em;
+    list-style: none;
+    background-color: $bgColor2;
+    padding: 3%;
+    &:hover{
+      box-shadow: 0 0 0.5em $hoverBgColor;
+      cursor: pointer;
+    } 
+  }
+}
+
+#txtSearch {
+  font-size: $text;
+  width: 80%;
+}
+
+#btnSearch {
+  font-size: $text;
+  padding: 0 1% 0 1%;
+}

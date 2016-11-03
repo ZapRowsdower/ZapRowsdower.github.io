@@ -1,0 +1,131 @@
+body {
+  background-color: #4c4c5f;
+}
+
+header {
+  background-color: #000;
+  cursor: pointer;
+}
+header h1 {
+  margin-top: 0;
+  padding: 1%;
+  font-family: "Linux Libertine", Georgia, Times, serif;
+  font-size: 1.5em;
+  color: #fff;
+}
+
+button {
+  border: none;
+  background-color: #000;
+  color: #fff;
+}
+button:hover {
+  box-shadow: 0 0 0.5em #0cf;
+  background-color: #0cf;
+  color: #fff;
+}
+
+footer {
+  color: #999;
+}
+footer a {
+  color: #0cf;
+}
+footer a:hover {
+  color: #0cf;
+}
+
+.main {
+  margin-top: 3%;
+  font-size: 1.4em;
+}
+.main a,
+.main li {
+  color: #0cf;
+}
+.main li {
+  margin: 1%;
+  list-style-type: square;
+}
+
+.splash-screen {
+  font-family: "Oswald", sans-serif;
+}
+
+.divider h2 {
+  font-size: 4em;
+  margin-top: 0;
+  color: #999;
+}
+
+.pane {
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.5em;
+  padding: 1%;
+}
+.pane i {
+  font-size: 4em;
+  margin-top: 0 auto;
+}
+.pane:hover, .pane:active {
+  box-shadow: 0 0 0.5em #0cf;
+  background-color: #0cf;
+}
+
+.my-loader {
+  margin: 0 auto;
+  border-radius: 50%;
+  border-left: 0.4em solid rgba(0, 232, 255, 0.8);
+  border-right: 0.4em solid rgba(0, 232, 255, 0.2);
+  border-bottom: 0.4em solid rgba(0, 232, 255, 0.4);
+  border-top: 0.4em solid #fff;
+  box-shadow: 0 0 0.5em #0cf;
+  width: 8em;
+  height: 8em;
+  transform: rotate(90deg);
+  animation: spin 0.5s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.search, .results {
+  margin-bottom: 4%;
+  font-family: "Lato", sans-serif;
+}
+
+.results h3 {
+  font-weight: bold;
+  font-family: "Oswald", sans-serif;
+}
+.results a {
+  text-decoration: none;
+}
+.results li {
+  margin-left: -1em;
+  list-style: none;
+  background-color: #343436;
+  padding: 3%;
+}
+.results li:hover {
+  box-shadow: 0 0 0.5em #0cf;
+  cursor: pointer;
+}
+
+#txtSearch {
+  font-size: 1.4em;
+  width: 80%;
+}
+
+#btnSearch {
+  font-size: 1.4em;
+  padding: 0 1% 0 1%;
+}
