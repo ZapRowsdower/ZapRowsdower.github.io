@@ -1,5 +1,5 @@
 //DATA ------//
-var streamers = ["freecodecamp", "ESL_SC2", "OgamingSC2", "cretetion", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"],
+var streamers = ["freecodecamp", "ESL_SC2", "OgamingSC2", "cretetion", "storbeck", "habathcx", "noobs2ninjas"],
   streamerObjs = [],
   twitchBaseUrl = "https://api.twitch.tv/kraken/",
 
@@ -9,7 +9,6 @@ var streamers = ["freecodecamp", "ESL_SC2", "OgamingSC2", "cretetion", "storbeck
 
 //METHODS-------//
 var buildStreamerUI = function(streamerObj, streamer) {
-  debugger;
   if (streamerObj.hasOwnProperty('error')) {
     $ulStreamers.append("<li class='offline' id=" + streamer + "><i class='fa fa-ban'>&nbsp;</i>" + streamer + "<span> account not found</span></li>");
   } else {
@@ -17,7 +16,7 @@ var buildStreamerUI = function(streamerObj, streamer) {
     var $currLi = $("li#" + streamerObj.display_name);
     $currLi.append("<a target='_new' href=" + streamerObj.url + "><img class='logo' src=" + streamerObj.logo + "> " +
       streamerObj.display_name + "</a>");
-    if (streamerObj.status == null || streamerObj.status == undefined) {
+    if (streamerObj.status === null || streamerObj.status === undefined) {
       //offline
       $currLi.addClass('offline');
       $currLi.append("<span> is offline</span>");
@@ -32,18 +31,17 @@ var buildStreamerUI = function(streamerObj, streamer) {
 var buildStreamerList = function(streamers) {
   for (i = 0; i < streamers.length; i++) {
     getChannel(streamers[i]);
-  };
+  }
 };
 
 var checkStream = function(channelData, streamer) {
-  var streamUrl = twitchBaseUrl + "streams/" + streamer + "?callback=?";
+  var streamUrl = twitchBaseUrl + "streams/" + streamer;
   $.ajax({
     type: 'GET',
     url: streamUrl,
     headers: {
       'Client-ID': 'egde13ylh4s8475jv00o5ltcdlwuahi'
     },
-    dataType: 'jsonp',
     error: function(error) {
       alert(error.message);
     },
@@ -57,7 +55,6 @@ var checkStream = function(channelData, streamer) {
 
 var getChannel = function(streamer) {
   // var channelUrl = twitchBaseUrl+"channels/"+streamer+"?callback=?";
-  debugger;
   $.ajax({
     type: 'GET',
     url: 'https://api.twitch.tv/kraken/channels/' + streamer,
