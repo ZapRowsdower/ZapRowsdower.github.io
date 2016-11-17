@@ -54,7 +54,6 @@ var checkStream = function(channelData, streamer) {
 };
 
 var getChannel = function(streamer) {
-  // var channelUrl = twitchBaseUrl+"channels/"+streamer+"?callback=?";
   $.ajax({
     type: 'GET',
     url: 'https://api.twitch.tv/kraken/channels/' + streamer,
