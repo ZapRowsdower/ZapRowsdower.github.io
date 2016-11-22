@@ -20,6 +20,10 @@ body {
 header {
   background-color: $buttonBgColor;
   cursor: pointer;
+  &:hover {
+    background-color: $hoverBgColor;
+    box-shadow: 0 0 0.5em $hoverBgColor;
+  }
   h1 {
     margin-top: 0;
     padding: 1%;
@@ -128,7 +132,7 @@ footer {
     &:hover{
       box-shadow: 0 0 0.5em $hoverBgColor;
       cursor: pointer;
-    } 
+    }
   }
 }
 
