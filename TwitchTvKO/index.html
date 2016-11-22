@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Twitch TV  Connector - Free Code Camp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/TwitchTvKo.css">
+  </head>
+  <body>
+    <header>
+      <h1 class="text-center"><i class="fa fa-twitch fa-lg">&nbsp;</i>Twitch Streamers</h1>
+    </header>
+    <section class="container main">
+      <div class="row text-center sel-status">
+        <div class="col-xs-4 all" data-bind="css: {selected: streamFilterStatus() === 'all'}, click: function () {setStreamFilterStatus('all')}" >
+          <i class="fa fa-circle fa-lg">&nbsp;</i>
+          <span class="stream-status" id="all">All</span>
+        </div>
+        <div class="col-xs-4 online" data-bind="css: {selected: streamFilterStatus() === 'online'}, click: function() {setStreamFilterStatus('online')}">
+          <i class="fa fa-circle fa-lg">&nbsp;</i>
+          <span class="stream-status" id="online">Online</span>
+        </div>
+        <div class="col-xs-4 offline" data-bind="css: {selected: streamFilterStatus() === 'offline'}, click: function() {setStreamFilterStatus('offline')}" >
+          <i class="fa fa-circle fa-lg">&nbsp;</i>
+          <span class="stream-status" id="offline">Offline</span>
+        </div>
+      </div>
+      <!-- template for stream status of all or offline -->
+      <div class="div-streamers" data-bind="if: streamFilterStatus() === 'all' || streamFilterStatus() === 'offline'">
+        <ul class="list-streamers" data-bind="foreach: streamerObjs">
+          <li class="offline" data-bind="visible: status === null || status === undefined, attr:{id: display_name}">
+            <a target="_new" data-bind="attr:{href: url}"><img class="logo" data-bind="attr: {src: logo}"></a>
+            <a target="_new" data-bind="attr:{href: url}, text: display_name"></a>
+            <span> is offline</span>
+          </li>
+        </ul>
+      </div>
+      <!-- template for stream status of all or online -->
+      <div class="div-streamers" data-bind="if: streamFilterStatus() === 'online'|| streamFilterStatus() ==='all'">
+        <ul class="list-streamers" data-bind="foreach: streamerObjs">
+          <li data-bind="visible: status !== null, attr:{id: display_name, class: online">
+            <a target="_new" data-bind="attr:{href: url}"><img class="logo" data-bind="attr: {src: logo}"></a>
+            <a target="_new" data-bind="attr:{href: url}, text: display_name"></a>
+            <span> is streaming <span data-bind="text: status"></span></span>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <footer>
+      <p class="text-center">Designed and built by Jonathan Ely for <a href="https://www.freecodecamp.com/">FreeCodeCamp</a></p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+    <script src="js/TwitchTvKo.js"></script>
+  </body>
+</html>

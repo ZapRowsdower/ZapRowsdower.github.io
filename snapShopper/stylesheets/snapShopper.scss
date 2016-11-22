@@ -1,0 +1,13 @@
+.clickable{
+  cursor: pointer;
+  &:hover{
+    background-color: #4c4c4c;
+    color: #fff;
+  }
+}
+.inline{
+  display: inline;
+}
+.outline {
+  display: none;
+}

@@ -1,0 +1,119 @@
+//COLOR SWATCHES ------- //
+$twitchPurple: #6441A4;
+$brightBlue: #0cf;
+$white: #fff;
+$nearWhite: #efefef;
+$grey: #ccc;
+$darkGrey: #4c4c4c;
+$red: red;
+
+//ASSIGNED COLORS ------- //
+$online: $red;
+$offline: $darkGrey;
+$all: $twitchPurple;
+$headerColor: $white;
+$backgroundColor: $nearWhite;
+$hoverBgColor: $twitchPurple;
+$linkColor: $twitchPurple;
+
+//TYPEFACES ------- //
+$lato: Lato, sans-serif;
+
+//FONT SIZES ------- //
+$small: 1.0em;
+$smaller: 1.3em;
+$normal: 1.4em;
+$header: 1.8em;
+
+//EFFECTS ------- //
+  $box-shadow: 0 0 0.5em;
+  $purpleGlow: $box-shadow $hoverBgColor;
+  $redGlow: $box-shadow $red;
+  $darkGreyShadow: $box-shadow $darkGrey;
+
+//ELEMENT STYLES ------- //
+body {
+  background-color: $backgroundColor;
+}
+
+header h1 {
+  margin-top: 0;
+  padding: 0.25em;
+  background-color: $headerColor;
+  color: $twitchPurple;
+}
+
+//CLASSES ------- //
+.stream-status {
+  font-size: $normal;
+}
+
+.sel-status {
+  padding: 0.5em;
+  cursor: pointer;
+  div {
+    transition: border-bottom 0.1s;
+  }
+  i{
+    vertical-align: baseline;
+  }
+
+  .all {
+    color: $all;
+    &:hover {
+      color: $white;
+      background-color: $all;
+      box-shadow: $purpleGlow;
+    }
+  }
+
+  .online {
+    color: $online;
+    &:hover {
+      color: $white;
+      background-color: $online;
+      box-shadow: $redGlow;
+    }
+  }
+
+  .offline {
+    color: $offline;
+    &:hover {
+      color: $white;
+      background-color: $offline;
+      box-shadow: $darkGreyShadow;
+    }
+  }
+}
+
+.selected {
+   border-bottom: 0.25em solid;
+}
+
+.list-streamers {
+  li {
+  font-family: $lato;
+  font-size: $normal;
+  margin-bottom: 0.5em;
+  margin-left: -2em;
+  padding: 0.5em;
+  list-style: none;
+  border-bottom: solid 1px $grey;
+  // &:hover {
+  //   background-color: $hoverBgColor;
+  //   box-shadow: $purpleGlow;
+  //   color: $nearWhite;
+  // }
+  }
+  a {
+    font-weight: bold;
+    text-decoration: none;
+    color: $linkColor;
+  }
+}
+
+.logo {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}

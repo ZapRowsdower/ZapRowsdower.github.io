@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,UAAU;EACR,MAAM,EAAE,OAAO;EACf,gBAAO;IACL,gBAAgB,EAAE,OAAO;IACzB,KAAK,EAAE,IAAI;;AAGf,OAAO;EACL,OAAO,EAAE,MAAM;;AAEjB,QAAS;EACP,OAAO,EAAE,IAAI",
+"sources": ["snapShopper.scss"],
+"names": [],
+"file": "snapShopper.css"
+}
