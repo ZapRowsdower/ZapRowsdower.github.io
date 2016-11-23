@@ -32,15 +32,15 @@ var snapShopper = (function () {
       this.foodItems.push(newItem);
       this.shoppingTotal(this.shoppingTotal()+item.itemCost());
       this.totalCalories(this.totalCalories()+item.itemCals());
+      isAddingFood(false);
     };
     this.editFoodItem = function (){
       isAddingFood(true);
       foodItem.itemName(this.itemName);
-      foodItem.itemCost(this.itemCost());
-      foodItem.itemCost(this.caloriesMax);
+      foodItem.itemCost(this.itemCost);
+      foodItem.itemCost(this.itemCals);
       console.log(this);
       console.log(ko.toJSON(foodItem));
-      isAddingFood(false);
     };
     this.caloriesRemaining = ko.computed(function() {
       return this.caloriesMax() - this.totalCalories();
