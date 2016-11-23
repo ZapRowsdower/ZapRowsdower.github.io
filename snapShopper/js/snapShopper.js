@@ -38,9 +38,13 @@ var snapShopper = (function () {
       isAddingFood(true);
       foodItem.itemName(this.itemName);
       foodItem.itemCost(this.itemCost);
-      foodItem.itemCost(this.itemCals);
+      foodItem.itemCals(this.itemCals);
       console.log(this);
       console.log(ko.toJSON(foodItem));
+    };
+    this.removeItem = function () {
+      console.log(this);
+      foodItems.remove(this);
     };
     this.caloriesRemaining = ko.computed(function() {
       return this.caloriesMax() - this.totalCalories();

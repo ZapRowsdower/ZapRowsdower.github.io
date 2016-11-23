@@ -93,6 +93,7 @@
           <br>
           <br>
           <button class="btn-primary" data-bind="click: function() {addFoodItem(this.foodItem)}">Add Item</button>
+
         </div>
       </section>
     </div>
@@ -107,6 +108,9 @@
       </td>
       <td>
         <p data-bind="text: itemCals"></p>
+      </td>
+      <td>
+        <p data-bind="click: removeItem">Delete</p>
       </td>
     </tr>
   </script>
