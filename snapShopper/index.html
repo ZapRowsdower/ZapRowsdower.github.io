@@ -42,9 +42,11 @@
       <section class="col-xs-12 text-center" data-bind="visible: !isGroceryShopping()">
         <h2>SNAP Shopper</h2>
         <p>A grocery shopping app with a strict budget</p>
+        <p data-bind="text: name"></p>
         <button class="btn-primary h3" data-bind="click: function() {setGroceryShopping(true)}">Get Started!</button>
       </section>
-      <section class="col-xs-12" data-bind="visible: isGroceryShopping() && isAddingFood() === false">
+      <!-- <section class="col-xs-12" data-bind="visible: isGroceryShopping() && isAddingFood() === false"> -->
+      <section class="col-xs-12" data-bind="visible: isGroceryShopping() && itemForEditing() === null">
         <div class="col-xs-10">
           <h3 class="inline h4 text-center">My Groceries: <span data-bind="text: shoppingTotal"></span></h3>
         </div>
@@ -53,8 +55,8 @@
         </div>
         <br>
         <div class="col-xs-12">
-          <p class="col-xs-6">Cals Left: <span data-bind="text: caloriesRemaining"></span></p>
-          <p class="col-xs-6">Money Left: <span data-bind="text: moneyLeft"></span></p>
+          <!-- <p class="col-xs-6">Cals Left: <span data-bind="text: caloriesRemaining"></span></p>
+          <p class="col-xs-6">Money Left: <span data-bind="text: moneyLeft"></span></p> -->
         </div>
         <div class="col-xs-12 text-center">
           <div class="clickable btn-lg" data-bind="click: function() {isAddingFood(true)}">
@@ -66,19 +68,39 @@
               <th>Cost</th>
               <th>Cals</th>
             </thead>
-            <tbody data-bind="template: {name: 'foodTemplate', foreach: foodItems}"></tbody>
+            <tbody data-bind="template: {name: 'itemTemplate', foreach: items}"></tbody>
+            <!-- <tbody data-bind="template: {name: 'foodTemplate', foreach: foodItems}"></tbody> -->
           </table>
           <button class="btn-danger" data-bind="click: function() {resetShopping()}">Reset</button>
         </div>
       </section>
-      <section class="col-xs-12" data-bind="visible: isAddingFood()">
+      <!-- <section class="col-xs-12" data-bind="visible: isAddingFood()"> -->
+      <section class="col-xs-12" data-bind="with: itemForEditing">
         <div class="col-xs-10 text-center">
           <h3 class="inline h4">Add New Grocery Item</h3>
         </div>
         <div class="col-xs-2">
-          <i class="fa fa-2x fa-times-circle clickable" aria-hidden="true" data-bind="click: function(){isAddingFood(false)}"></i>
+          <i class="fa fa-2x fa-times-circle clickable" aria-hidden="true" data-bind="click: $parent.revertItem"></i>
+          <!-- <i class="fa fa-2x fa-times-circle clickable" aria-hidden="true" data-bind="click: function(){isAddingFood(false)}"></i> -->
         </div>
-        <div class="col-xs-12 text-center">
+        <div class="col-xs-12 text-center" >
+          <label>*Item Name</label>
+          <br>
+          <input type="text" data-bind="value: name">
+          <br>
+          <label>*Cost</label>
+          <br>
+          <input type="text" data-bind="value: price">
+          <br>
+          <label>*Total Calories</label>
+          <br>
+          <input type="text" data-bind="value: calories">
+          <br>
+          <br>
+          <button class="btn-danger" data-bind="click: $parent.acceptItem">Add/Save Item</button>
+          <!-- <button class="btn-primary" data-bind="click: function() {addItem(this.foodItem)}">Add Item</button> -->
+        </div>
+        <!-- <div class="col-xs-12 text-center">
           <label>*Item Name</label>
           <br>
           <input type="text" data-bind="value: foodItem.itemName">
@@ -93,11 +115,26 @@
           <br>
           <br>
           <button class="btn-primary" data-bind="click: function() {addFoodItem(this.foodItem)}">Add Item</button>
-
-        </div>
+        </div> -->
       </section>
     </div>
   </body>
+  <script type="text/html" id="itemTemplate">
+    <tr class="clickable" data-bind="click: $parent.selectItem">
+      <td>
+        <p data-bind="text: name"></p>
+      </td>
+      <td>
+        <p data-bind="text: price"></p>
+      </td>
+      <td>
+        <p data-bind="text: calories"></p>
+      </td>
+      <td>
+        <!-- <p data-bind="click: revertItem">Delete</p> -->
+      </td>
+    </tr>
+  </script>
   <script type="text/html" id="foodTemplate">
     <tr class="clickable" data-bind="click: editFoodItem">
       <td>
