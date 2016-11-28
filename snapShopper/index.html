@@ -41,11 +41,9 @@
       </nav>
       <section class="col-xs-12 text-center" data-bind="visible: !isGroceryShopping()">
         <h2>SNAP Shopper</h2>
-        <p>A grocery shopping app with a strict budget</p>
-        <p data-bind="text: name"></p>
+        <p>A grocery shopping app on a strict budget</p>
         <button class="btn-primary h3" data-bind="click: function() {setGroceryShopping(true)}">Get Started!</button>
       </section>
-      <!-- <section class="col-xs-12" data-bind="visible: isGroceryShopping() && isAddingFood() === false"> -->
       <section class="col-xs-12" data-bind="visible: isGroceryShopping() && itemForEditing() === null">
         <div class="col-xs-10">
           <h3 class="inline h4 text-center">My Groceries: <span data-bind="text: shoppingTotal"></span></h3>
@@ -59,64 +57,54 @@
           <p class="col-xs-6">Money Left: <span data-bind="text: moneyLeft"></span></p> -->
         </div>
         <div class="col-xs-12 text-center">
-          <div class="clickable btn-lg" data-bind="click: function() {isAddingFood(true)}">
-            <i class="fa fa-lg fa-plus-circle"></i><span> Add New Grocery Item</span>
+          <div class="clickable btn-lg" data-bind="click: createItem">
+            <i class="fa fa-lg fa-plus-circle"></i><span> Add New Item</span>
           </div>
           <table class="table table-striped table-hover text-left">
             <thead>
               <th>Name</th>
-              <th>Cost</th>
+              <th>Price</th>
               <th>Cals</th>
             </thead>
             <tbody data-bind="template: {name: 'itemTemplate', foreach: items}"></tbody>
-            <!-- <tbody data-bind="template: {name: 'foodTemplate', foreach: foodItems}"></tbody> -->
           </table>
-          <button class="btn-danger" data-bind="click: function() {resetShopping()}">Reset</button>
+          <button class="btn-danger" data-bind="click: resetShopping">Reset</button>
         </div>
       </section>
-      <!-- <section class="col-xs-12" data-bind="visible: isAddingFood()"> -->
       <section class="col-xs-12" data-bind="with: itemForEditing">
         <div class="col-xs-10 text-center">
           <h3 class="inline h4">Add New Grocery Item</h3>
         </div>
         <div class="col-xs-2">
           <i class="fa fa-2x fa-times-circle clickable" aria-hidden="true" data-bind="click: $parent.revertItem"></i>
-          <!-- <i class="fa fa-2x fa-times-circle clickable" aria-hidden="true" data-bind="click: function(){isAddingFood(false)}"></i> -->
         </div>
         <div class="col-xs-12 text-center" >
           <label>*Item Name</label>
           <br>
-          <input type="text" data-bind="value: name">
+          <span>&nbsp;<input type="text" placeholder="Potatoes" required data-bind="value: name"></span>
           <br>
-          <label>*Cost</label>
+          <label>*Price</label>
           <br>
-          <input type="text" data-bind="value: price">
+          <!-- TODO: price validation  -->
+          <span>$<input type="number" step=".25" placeholder="1.00" required inputmode="numeric" pattern="\d+(\.\d*)?" data-bind="value: price"></span>
           <br>
           <label>*Total Calories</label>
           <br>
-          <input type="text" data-bind="value: calories">
+          <span>&nbsp;<input type="number" step="100" placeholder="1100" required inputmode="numeric" pattern="[0-9]*" data-bind="value: calories"></span>
           <br>
           <br>
-          <button class="btn-danger" data-bind="click: $parent.acceptItem">Add/Save Item</button>
-          <!-- <button class="btn-primary" data-bind="click: function() {addItem(this.foodItem)}">Add Item</button> -->
+          <button class="btn-primary" type="submit" data-bind="click: $parent.acceptItem">
+            <i class="fa fa-check">&nbsp;</i>Save Item
+          </button>
+          <button class="btn-danger" data-bind="click: $parent.revertItem">
+            <i class="fa fa-times">&nbsp;</i>Cancel
+          </button>
+          <button class="btn-danger" data-bind="click: $parent.removeItem">
+            <i class="fa fa-trash-o">&nbsp;</i>Delete
+          </button>
         </div>
-        <!-- <div class="col-xs-12 text-center">
-          <label>*Item Name</label>
-          <br>
-          <input type="text" data-bind="value: foodItem.itemName">
-          <br>
-          <label>*Cost</label>
-          <br>
-          <input type="text" data-bind="value: foodItem.itemCost">
-          <br>
-          <label>*Total Calories</label>
-          <br>
-          <input type="text" data-bind="value: foodItem.itemCals">
-          <br>
-          <br>
-          <button class="btn-primary" data-bind="click: function() {addFoodItem(this.foodItem)}">Add Item</button>
-        </div> -->
       </section>
+      <div data-bind="text: ko.toJSON($root)"></div>
     </div>
   </body>
   <script type="text/html" id="itemTemplate">
@@ -131,23 +119,7 @@
         <p data-bind="text: calories"></p>
       </td>
       <td>
-        <!-- <p data-bind="click: revertItem">Delete</p> -->
-      </td>
-    </tr>
-  </script>
-  <script type="text/html" id="foodTemplate">
-    <tr class="clickable" data-bind="click: editFoodItem">
-      <td>
-        <p data-bind="text: itemName"></p>
-      </td>
-      <td>
-        <p data-bind="text: itemCost"></p>
-      </td>
-      <td>
-        <p data-bind="text: itemCals"></p>
-      </td>
-      <td>
-        <p data-bind="click: removeItem">Delete</p>
+        <p data-bind="click: $parent.removeItem">Delete</p>
       </td>
     </tr>
   </script>
@@ -155,6 +127,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!-- Required: Boostrap JS file -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+  <script src="js/knockout-3.4.1.debug.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script> -->
   <script src="js/snapShopper.js"></script>
 </html>
