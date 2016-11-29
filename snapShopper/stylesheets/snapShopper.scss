@@ -1,6 +1,6 @@
 .clickable{
   cursor: pointer;
-  &:hover{
+  &:active{
     background-color: #4c4c4c;
     color: #fff;
   }
@@ -10,4 +10,15 @@
 }
 .outline {
   display: none;
+}
+.progressBarBg{
+  background-color: #4c4c4c;
+  width: 100%;
+  display: inline-block;
+  font-size: 8px;
+}
+.progressBarFill{
+  background-color: #ccc;
+  display: inline-block;
+  float:left;
 }

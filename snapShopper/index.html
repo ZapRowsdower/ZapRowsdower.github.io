@@ -46,15 +46,26 @@
       </section>
       <section class="col-xs-12" data-bind="visible: isGroceryShopping() && itemForEditing() === null">
         <div class="col-xs-10">
-          <h3 class="inline h4 text-center">My Groceries: <span data-bind="text: shoppingTotal"></span></h3>
+          <h3 class="inline h4 text-center">My Groceries: $<span data-bind="text: totalPrice"></span></h3>
         </div>
         <div class="col-xs-2 text-center">
           <i class="fa fa-2x fa-times-circle clickable" aria-hidden="true" data-bind="click: function(){setGroceryShopping(false)}"></i>
         </div>
         <br>
         <div class="col-xs-12">
-          <!-- <p class="col-xs-6">Cals Left: <span data-bind="text: caloriesRemaining"></span></p>
-          <p class="col-xs-6">Money Left: <span data-bind="text: moneyLeft"></span></p> -->
+          <!-- <p class="col-xs-6">
+            Total Cals: <span data-bind="text: totalCalories"></span>
+            <br>
+          </p> -->
+          <p class="col-xs-6">Calories Needed:
+            <span data-bind="text: caloriesLeft"></span>
+            <span class="progressBarBg"><span data-bind="style:{width:totalCaloriesPercent}" class="progressBarFill">&nbsp;</span></span>
+          </p>
+          <!-- <p class="col-xs-6">Total Spent: $<span data-bind="text: totalPrice"></span></p> -->
+          <p class="col-xs-6">Money Left: $<span data-bind="text: moneyLeft"></span>
+            <span class="progressBarBg"><span data-bind="style:{width:totalMoneyPercent}"  class="progressBarFill">&nbsp;</span></span>
+          </p>
+          <br>
         </div>
         <div class="col-xs-12 text-center">
           <div class="clickable btn-lg" data-bind="click: createItem">
@@ -65,10 +76,11 @@
               <th>Name</th>
               <th>Price</th>
               <th>Cals</th>
+              <th></th>
             </thead>
             <tbody data-bind="template: {name: 'itemTemplate', foreach: items}"></tbody>
           </table>
-          <button class="btn-danger" data-bind="click: resetShopping">Reset</button>
+          <button class="btn-danger" data-bind="click: resetShopping">Clear List</button>
         </div>
       </section>
       <section class="col-xs-12" data-bind="with: itemForEditing">
@@ -86,11 +98,15 @@
           <label>*Price</label>
           <br>
           <!-- TODO: price validation  -->
-          <span>$<input type="number" step=".25" placeholder="1.00" required inputmode="numeric" pattern="\d+(\.\d*)?" data-bind="value: price"></span>
+          <span>$<input type="number" step=".25" placeholder="1.00" inputmode="numeric" pattern="\d+(\.\d*)?" data-bind="numericValue: price"></span>
           <br>
-          <label>*Total Calories</label>
+          <label>*Calories Per Serving</label>
           <br>
-          <span>&nbsp;<input type="number" step="100" placeholder="1100" required inputmode="numeric" pattern="[0-9]*" data-bind="value: calories"></span>
+          <span>&nbsp;<input type="number" step="100" placeholder="1100" inputmode="numeric" pattern="[0-9]*" data-bind="numericValue: calories"></span>
+          <br>
+          <label>*Total Servings</label>
+          <br>
+          <span>&nbsp;<input type="number" step="5" placeholder="10" inputmode="numeric" pattern="[0-9]*" data-bind="numericValue: servings"></span>
           <br>
           <br>
           <button class="btn-primary" type="submit" data-bind="click: $parent.acceptItem">
@@ -116,7 +132,8 @@
         <p data-bind="text: price"></p>
       </td>
       <td>
-        <p data-bind="text: calories"></p>
+        <span>Per serving:<p data-bind="text: calories"></p></span>
+        <span>Total:<p data-bind="text: totalItemCals"></p></span>
       </td>
       <td>
         <p data-bind="click: $parent.removeItem">Delete</p>
