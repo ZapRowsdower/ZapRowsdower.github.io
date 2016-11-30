@@ -1,18 +1,22 @@
-//TODO: get consistent decimal number formatting
-  //TODO: add isDirty functionality
-  //TODO: form validation
-  //TODO: grid sorting
-  //TODO: implement price text formatting for UI display (we're losing trailing zeros)
-  //TODO: allow decimal entry for servings?
+//TODO: add isDirty functionality
+//TODO: form validation
+//TODO: grid sorting
+//TODO: implement price text formatting for UI display (we're losing trailing zeros)
+//TODO: allow decimal entry for servings?
 var snapShopper = (function () {
   // Properties
   ///////////////////////////
   var Item = function(data) {
       this.name = ko.observable();
-      this.price = ko.observable();
-      this.calories = ko.observable();
-      this.servings = ko.observable();
+      this.price = ko.observable().extend({ numeric: 2 });//rounds to two decimals
+      this.calories = ko.observable().extend({ numeric: 1 });//rounds to whole num
+      this.servings = ko.observable().extend({ numeric: 2 });
+      //NOTE: not using computed here because we don't need instant updating.
+      //Values are only set when using update method
       this.totalItemCals = ko.observable();
+      this.formattedPrice = ko.computed(function(){
+        return "$"+this.price().toFixed(2);
+      }, this);
       //populate our model with the initial data
       this.update(data);
   };
@@ -24,7 +28,6 @@ var snapShopper = (function () {
       this.servings(data.servings);
       this.totalItemCals(this.calories()*this.servings());
     } else {
-      debugger;
       this.name("Edit Me!");
       this.price(0);
       this.calories(0);
@@ -49,14 +52,49 @@ var snapShopper = (function () {
       this.revertItem = this.revertItem.bind(this);
       this.removeItem = this.removeItem.bind(this);
     ////////////////////////////////////////////////////
-    this.budgetCap = ko.observable(28);
     this.isGroceryShopping = ko.observable(false);
+    this.budgetCap = ko.observable(28);
     this.weeklyCalories = ko.observable(16800);
     this.caloriesMax = ko.observable(2400);
   //METHODS ------------------------------------------ //
     this.formatDecimal = function(value) {
-      //NOTE: forces decimal numbers to have at least two decimal points
+    //NOTE: use when displaying in UI only! Converts numbers to strings!
+      //forces decimal numbers to have at least two decimal points
       return value.toFixed(2);
+    };
+    this.testSort = function(prop, isAscending, formatting) {
+      //from http://stackoverflow.com/a/979325
+      var key = formatting ? function(x) {return formatting(x[prop])}:function(x){return x[prop]};
+        isAscending = !isAscending ? -1 : 1;
+        this.items.sort(function (a, b) {
+          a = key(a)();
+          b = key(b)();
+          return isAscending * ((a > b) - (b > a));
+        });
+    };
+    this.numberSort = function(prop, isAscending) {
+      if(isAscending===true){
+        this.items.sort(function (a, b) {
+          return a[prop]() - b[prop]();
+        });
+      } else if (isAscending===false) {
+        this.items.sort(function (a, b) {
+          return b[prop]() - a[prop]();
+        });
+      }
+    };
+    this.sortByPriceDesc = function() {
+      this.items.sort(function(a, b) {
+        return b.price() - a.price();
+      });
+    };
+    this.setGroceryShopping = function (state) {
+      this.isGroceryShopping(state);
+    };
+    this.resetShopping = function () {
+      if(confirm("This will reset your grocery list. Are you sure? (Y/N)")) {
+        this.items.removeAll();
+      }
     };
     this.totalCalories = ko.computed(function(){
       var totalCals = 0;
@@ -95,19 +133,10 @@ var snapShopper = (function () {
       if (result > 0 && result < 100) {
         return result+"%";
       } else if (result > 100) return "100%";
-
     }, this);
     this.caloriesRemaining = ko.computed(function() {
       return this.weeklyCalories() - this.totalCalories();
     }, this);
-    this.setGroceryShopping = function (state) {
-      this.isGroceryShopping(state);
-    };
-    this.resetShopping = function () {
-      if(confirm("This will reset your grocery list. Are you sure? (Y/N)")) {
-        this.items.removeAll();
-      }
-    };
   };
   //add functionality to the viewmodel
   ko.utils.extend(myViewModel.prototype, {
@@ -116,8 +145,6 @@ var snapShopper = (function () {
         //'this' is myViewModel object
         this.selectedItem(item);
         this.itemForEditing(new Item(ko.toJS(item)));//convert the item to a plain JS object
-        console.log(this.items());
-        console.log(this.itemForEditing());
       },
       // When a user accepts the data, we need to make sure that we update the
       // cached data with the current state of the model
@@ -132,16 +159,12 @@ var snapShopper = (function () {
         //clear selected item
         this.selectedItem(null);
         this.itemForEditing(null);
-        console.log(this.items());
       },
       //just throw away the edited item and clear the selected observables
       revertItem: function() {
         //TODO: delete newly created items from the items collection
         this.selectedItem(null);
         this.itemForEditing(null);
-        console.log(this.items());
-        console.log(this.selectedItem());
-        console.log(this.itemForEditing());
       },
       createItem: function () {
         var newItem = new Item();
@@ -165,25 +188,32 @@ var snapShopper = (function () {
         }
       }
   });
-  //NOTE:KO input value binding converts numbers to strings by default.
-  //This adds custom input data-binding to force values to be numeric type (not strings)
-  //when writing to viewmodel. Will still read as strings
-  //http://stackoverflow.com/a/7396039
-  ko.bindingHandlers.numericValue = {
-    init : function(element, valueAccessor, allBindings, data, context) {
-        var interceptor = ko.computed({
-            read: function() {
-                return ko.unwrap(valueAccessor());
-            },
-            write: function(value) {
-                if (!isNaN(value)) {
-                    valueAccessor()(parseFloat(value));
+  //add to observables to intercept values and force them to be numeric.
+  //can also specify decimal precision
+  ko.extenders.numeric = function(target, precision) {
+    //create a writable computed observable to intercept writes to our observable
+    var result = ko.pureComputed({
+        read: target,  //always return the original observables value
+        write: function(newValue) {
+            var current = target(),
+                roundingMultiplier = Math.pow(10, precision),
+                newValueAsNum = isNaN(newValue) ? 0 : +newValue,
+                valueToWrite = Math.round(newValueAsNum * roundingMultiplier) / roundingMultiplier;
+            //only write if it changed
+            if (valueToWrite !== current) {
+                target(valueToWrite);
+            } else {
+                //if the rounded value is the same, but a different value was written, force a notification for the current field
+                if (newValue !== current) {
+                    target.notifySubscribers(valueToWrite);
                 }
-            },
-            disposeWhenNodeIsRemoved: element
-        });
-        ko.applyBindingsToNode(element, { value: interceptor }, context);
-    }
+            }
+        }
+    }).extend({ notify: 'always' });
+    //initialize with current value to make sure it is rounded appropriately
+    result(target());
+    //return the new computed observable
+    return result;
   };
   // Public Methods, must be exposed in return statement below
   ///////////////////////////
