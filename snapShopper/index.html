@@ -73,17 +73,18 @@
           </div>
           <table class="table table-striped table-hover text-left">
             <thead>
-              <th>
+              <th class="clickable" data-bind="click: function(){sortBy('name')}">
                 Name
-                <i data-bind="click: testSort('name', false)" class="fa fa-caret-down">&nbsp;</i>
-                <i data-bind="click: testSort('name', true)" class="fa fa-caret-up">&nbsp;</i>
+                <i data-bind="css:sortByCSS('name')">&nbsp;</i>
               </th>
-              <th class="clickable">
+              <th class="clickable" data-bind="click: function(){sortBy('price')}">
                 Price
-                <i data-bind="click: numberSort('price', false)" class="fa fa-caret-down">&nbsp;</i>
-                <i data-bind="click: numberSort('price', true)" class="fa fa-caret-up">&nbsp;</i>
+                <i data-bind="css:sortByCSS('price')">&nbsp;</i>
               </th>
-              <th>Cals</th>
+              <th class="clickable" data-bind="click: function(){sortBy('calories')}">
+                Cals
+                <i data-bind="css:sortByCSS('calories')">&nbsp;</i>
+              </th>
               <th></th>
             </thead>
             <tbody data-bind="template: {name: 'itemTemplate', foreach: items}"></tbody>

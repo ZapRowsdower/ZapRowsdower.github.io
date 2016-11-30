@@ -1,8 +1,8 @@
+//TODO: move whole grocery item table in to template
 //TODO: add isDirty functionality
 //TODO: form validation
-//TODO: grid sorting
-//TODO: implement price text formatting for UI display (we're losing trailing zeros)
 //TODO: allow decimal entry for servings?
+//TODO: add a checkmark to mark an item as having been bought
 var snapShopper = (function () {
   // Properties
   ///////////////////////////
@@ -38,56 +38,79 @@ var snapShopper = (function () {
   // Private Methods
   //////////////////////////
   var myViewModel = function (items){// the view model needs to be a function so that computed observables can work
+      var self = this;
     //DATA ---------------------------------------------- //
-      this.items = ko.observableArray(ko.utils.arrayMap(items, function(data) {
-        return new Item(data);
-      }));
-      //hold the currently selected item
-      this.selectedItem = ko.observable();
-      //make edits to a copy
-      this.itemForEditing = ko.observable(null);
-      //make this level of the view model available to the Item object context
-      this.selectItem = this.selectItem.bind(this);
-      this.acceptItem = this.acceptItem.bind(this);
-      this.revertItem = this.revertItem.bind(this);
-      this.removeItem = this.removeItem.bind(this);
-    ////////////////////////////////////////////////////
+    this.items = ko.observableArray(ko.utils.arrayMap(items, function(data) {
+      return new Item(data);
+    }));
+    //hold the currently selected item
+    this.selectedItem = ko.observable();
+    //make edits to a copy
+    this.itemForEditing = ko.observable(null);
+    //make this level of the view model available to the Item object context
+    this.selectItem = this.selectItem.bind(this);
+    this.acceptItem = this.acceptItem.bind(this);
+    this.revertItem = this.revertItem.bind(this);
+    this.removeItem = this.removeItem.bind(this);
+    ////////////////////////////////////////////
     this.isGroceryShopping = ko.observable(false);
     this.budgetCap = ko.observable(28);
     this.weeklyCalories = ko.observable(16800);
     this.caloriesMax = ko.observable(2400);
   //METHODS ------------------------------------------ //
     this.formatDecimal = function(value) {
-    //NOTE: use when displaying in UI only! Converts numbers to strings!
+      //NOTE: use when displaying in UI only! Converts numbers to strings!
       //forces decimal numbers to have at least two decimal points
       return value.toFixed(2);
     };
-    this.testSort = function(prop, isAscending, formatting) {
-      //from http://stackoverflow.com/a/979325
-      var key = formatting ? function(x) {return formatting(x[prop])}:function(x){return x[prop]};
-        isAscending = !isAscending ? -1 : 1;
-        this.items.sort(function (a, b) {
-          a = key(a)();
-          b = key(b)();
-          return isAscending * ((a > b) - (b > a));
+  //My grid observables -------------------------------- //
+    this.sortByClass = 'fa fa-sort';
+    this.sortByClassAsc = 'fa fa-caret-up';
+    this.sortByClassDesc = 'fa fa-caret-down';
+    this.lastSortedColumn = ko.observable('');
+    this.lastSort = ko.observable('Desc');
+
+    this.sortBy = function (columnName) {
+      //if the last sorted column isn't the current column...
+        if (self.lastSortedColumn() != columnName) {
+          //sort this column by ascending
+            self.sortByAsc(columnName);
+          //set the last sorted column to this column
+            self.lastSortedColumn(columnName);
+          //set the last sorted method to ascending
+            self.lastSort('Asc');
+      //if the last sort method was ascending...
+        } else if (self.lastSort() == 'Asc') {
+          //sort this column by descending
+            self.sortByDesc(columnName);
+          //set the last sort method used to descending
+            self.lastSort('Desc');
+        } else {
+      //if no other condition is met, just sort this column by ascending
+            self.sortByAsc(columnName);
+            self.lastSort('Asc');
+        }
+    };
+    this.sortByAsc = function (columnName) {
+      //TODO: abstract the array being sorted so this can be reused elsewhere
+        self.items.sort(function (a, b) {
+            return a[columnName]() < b[columnName]() ? -1 : 1;
         });
     };
-    this.numberSort = function(prop, isAscending) {
-      if(isAscending===true){
-        this.items.sort(function (a, b) {
-          return a[prop]() - b[prop]();
+    this.sortByDesc = function (columnName) {
+        self.items.reverse(function (a, b) {
+            return a[columnName]() < b[columnName]() ? -1 : 1;
         });
-      } else if (isAscending===false) {
-        this.items.sort(function (a, b) {
-          return b[prop]() - a[prop]();
-        });
-      }
     };
-    this.sortByPriceDesc = function() {
-      this.items.sort(function(a, b) {
-        return b.price() - a.price();
-      });
+    //sets the up/down sorting icons on the column
+    this.sortByCSS = function (columnName) {
+        if (columnName !== undefined && columnName !== '') {
+            return self.lastSortedColumn() == columnName ? (self.lastSort() == 'Asc' ? self.sortByClassAsc : self.sortByClassDesc) : self.sortByClass;
+        } else {
+            return '';
+        }
     };
+  //End My grid  -------------------------------- //
     this.setGroceryShopping = function (state) {
       this.isGroceryShopping(state);
     };
@@ -121,7 +144,6 @@ var snapShopper = (function () {
       if (result > 0 && result < 100) {
         return result+"%";
       } else if (result > 100) return "100%";
-
     }, this);
     this.caloriesLeft = ko.computed(function(){
       return this.weeklyCalories() - this.totalCalories();
@@ -177,6 +199,7 @@ var snapShopper = (function () {
         //see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness
         //if we haven't opened an individual item...
         if(this.selectedItem() == null) {
+          debugger;
           //...delete the item object reference being passed in
           this.items.remove(item);
         }
