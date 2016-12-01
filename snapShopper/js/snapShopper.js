@@ -5,8 +5,8 @@
 //TODO: add a checkmark to mark an item as having been bought
 //TODO: save grocery item data permanently
 var snapShopper = (function () {
-  // Properties
-  ///////////////////////////
+  // Data Objects
+  //////////////////////////////////////////////////////////////////////////////
   var Item = function(data) {
     this.name = ko.observable().extend({ required: "Please enter an item name" });
     this.price = ko.observable().extend({ numeric: 2 });//rounds to two decimals
@@ -37,11 +37,12 @@ var snapShopper = (function () {
     }
   };
 
-  // Private Methods
-  //////////////////////////
-  var myViewModel = function (items){// the view model needs to be a function so that computed observables can work
+  // View Models
+  //////////////////////////////////////////////////////////////////////////////
+  var myViewModel = function (items){
+    // NOTE: the view model needs to be a function so we can use computed observables
     // Set initial data
-    ///////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
     this.items = ko.observableArray(ko.utils.arrayMap(items, function(data) {
       return new Item(data);
     }));
@@ -50,7 +51,7 @@ var snapShopper = (function () {
     this.caloriesMax = ko.observable(2400);
 
     // Editor Observables
-    ///////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
     //hold the currently selected item
     this.selectedItem = ko.observable();
     //make edits to a copy
@@ -63,7 +64,7 @@ var snapShopper = (function () {
     this.removeAllItems = this.removeAllItems.bind(this);
 
     // Grid Properties, Observables, and Methods
-    ///////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
     this.sortByClass = 'fa fa-sort';
     this.sortByClassAsc = 'fa fa-caret-up';
     this.sortByClassDesc = 'fa fa-caret-down';
@@ -111,7 +112,7 @@ var snapShopper = (function () {
     };
 
     // UI Display Formatting Observables and Computeds
-    ///////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
     this.isGroceryShopping = ko.observable(false);
     this.formatDecimal = function(value) {
       //NOTE: use when displaying in UI only! Converts numbers to strings!
@@ -163,8 +164,8 @@ var snapShopper = (function () {
     }, this);
   };
 
-  // Extensions/Extenders - add functionality to the viewmodel and observables
-  ///////////////////////////////////////////////////////////////
+  // Extensions/Extenders - add functionality to the viewmodel and validation.
+  //////////////////////////////////////////////////////////////////////////////
   ko.utils.extend(myViewModel.prototype, {
       //select an item and make a copy of it for editing
       selectItem: function(item) {
@@ -265,8 +266,8 @@ var snapShopper = (function () {
     return target;
   };
 
-  // Public Methods, must be exposed in return statement below
-  ///////////////////////////////////////////////////////////////
+  // Public Methods - must be exposed in return statement below
+  //////////////////////////////////////////////////////////////////////////////
   var initKo = function (){
    ko.applyBindings(new myViewModel(
        [

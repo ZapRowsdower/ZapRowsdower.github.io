@@ -56,11 +56,19 @@
           <div class="col-xs-6">
             <span>Money Left:</span>
             <span data-bind="text: moneyLeft"></span>
+            <strong class="error" data-bind="visible: totalPrice() > 28">
+              <i class="fa fa-exclamation-triangle error"></i>
+              Over Budget
+            </strong>
             <span class="progressBarBg"><span data-bind="style:{width:totalMoneyPercent}" class="progressBarFill">&nbsp;</span></span>
           </div>
           <div class="col-xs-6">
-            <span>Calories Needed:</span>
-            <span data-bind="text: caloriesLeft"></span>
+            <span data-bind="visible: totalCalories() < 17000">Calories Needed:</span>
+            <span data-bind="text: caloriesLeft, visible: totalCalories() < 17000"></span>
+            <strong data-bind="visible: totalCalories() > 17000">
+              <i class="fa fa-check-circle"></i>
+              Weekly Calories Met
+            </strong>
             <span class="progressBarBg"><span data-bind="style:{width:totalCaloriesPercent}" class="progressBarFill">&nbsp;</span></span>
           </div>
           <br>
