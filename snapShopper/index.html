@@ -87,7 +87,7 @@
             </thead>
             <tbody data-bind="template: {name: 'itemTemplate', foreach: items}"></tbody>
           </table>
-          <button class="col-xs-6 btn-danger" title="Clear List Button" data-bind="click: resetShopping">
+          <button class="col-xs-6 btn-danger" title="Clear List Button" data-bind="click: removeAllItems">
             <i class="fa fa-lg fa-trash-o">&nbsp;</i>
             Clear List
           </button>
@@ -108,11 +108,10 @@
         <div class="col-xs-12 text-center" >
           <label>*Item Name</label>
           <br>
-          <span>&nbsp;<input type="text" placeholder="Enter an item name" required data-bind="textInput: name"></span>
+          <span>&nbsp;<input type="text" placeholder="Enter an item name" required data-bind="textInput: name, css:{error: name.hasError}"><span class="error" style="position: absolute;" data-bind="visible: name.hasError, text: name.validationMessage"></span></span>
           <br>
           <label>Price</label>
           <br>
-          <!-- TODO: price validation  -->
           <span>$<input type="number" step=".25" placeholder="1.00" inputmode="numeric" pattern="\d+(\.\d*)?" data-bind="value: price"></span>
           <br>
           <label>Calories Per Serving</label>

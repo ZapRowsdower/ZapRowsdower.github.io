@@ -10,13 +10,22 @@ body, nav {
 input {
   border: none;
   background-color: #051a25;
+  padding: 1%;
   font-size: 16px; }
+
+input.error {
+  color: #fff;
+  border: 1px solid red; }
 
 .clickable {
   cursor: pointer; }
   .clickable:active {
     background-color: #0d789f;
     color: #fff; }
+
+.error {
+  margin-left: 1%;
+  color: red; }
 
 .inline {
   display: inline; }

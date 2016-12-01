@@ -8,7 +8,7 @@ var snapShopper = (function () {
   // Properties
   ///////////////////////////
   var Item = function(data) {
-    this.name = ko.observable();
+    this.name = ko.observable().extend({ required: "Please enter an item name" });
     this.price = ko.observable().extend({ numeric: 2 });//rounds to two decimals
     this.calories = ko.observable().extend({ numeric: 1 });//rounds to whole num
     this.servings = ko.observable().extend({ numeric: 2 });
@@ -36,13 +36,21 @@ var snapShopper = (function () {
       this.totalItemCals(this.calories()*this.servings());
     }
   };
+
   // Private Methods
   //////////////////////////
   var myViewModel = function (items){// the view model needs to be a function so that computed observables can work
-    //DATA ---------------------------------------------- //
+    // Set initial data
+    ///////////////////////////////////////////////////////////////
     this.items = ko.observableArray(ko.utils.arrayMap(items, function(data) {
       return new Item(data);
     }));
+    this.budgetCap = ko.observable(28);
+    this.weeklyCalories = ko.observable(16800);
+    this.caloriesMax = ko.observable(2400);
+
+    // Editor Observables
+    ///////////////////////////////////////////////////////////////
     //hold the currently selected item
     this.selectedItem = ko.observable();
     //make edits to a copy
@@ -52,24 +60,15 @@ var snapShopper = (function () {
     this.acceptItem = this.acceptItem.bind(this);
     this.revertItem = this.revertItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
-    ////////////////////////////////////////////
-    this.isGroceryShopping = ko.observable(false);
-    this.budgetCap = ko.observable(28);
-    this.weeklyCalories = ko.observable(16800);
-    this.caloriesMax = ko.observable(2400);
-  //METHODS ------------------------------------------ //
-    this.formatDecimal = function(value) {
-      //NOTE: use when displaying in UI only! Converts numbers to strings!
-      //forces decimal numbers to have at least two decimal points
-      return value.toFixed(2);
-    };
-  //My grid observables -------------------------------- //
+    this.removeAllItems = this.removeAllItems.bind(this);
+
+    // Grid Properties, Observables, and Methods
+    ///////////////////////////
     this.sortByClass = 'fa fa-sort';
     this.sortByClassAsc = 'fa fa-caret-up';
     this.sortByClassDesc = 'fa fa-caret-down';
     this.lastSortedColumn = ko.observable('');
     this.lastSort = ko.observable('Desc');
-
     this.sortBy = function (columnName) {
       //if the last sorted column isn't the current column...
       if (this.lastSortedColumn() != columnName) {
@@ -80,7 +79,7 @@ var snapShopper = (function () {
         //set the last sorted method to ascending
         this.lastSort('Asc');
       //if the last sort method was ascending...
-    } else if (this.lastSort() == 'Asc') {
+      } else if (this.lastSort() == 'Asc') {
         //sort this column by descending
         this.sortByDesc(columnName);
         //set the last sort method used to descending
@@ -93,31 +92,34 @@ var snapShopper = (function () {
     };
     this.sortByAsc = function (columnName) {
       //TODO: abstract the array being sorted so this can be reused elsewhere
-        this.items.sort(function (a, b) {
-            return a[columnName]() < b[columnName]() ? -1 : 1;
-        });
+      this.items.sort(function (a, b) {
+          return a[columnName]() < b[columnName]() ? -1 : 1;
+      });
     };
     this.sortByDesc = function (columnName) {
-        this.items.reverse(function (a, b) {
-            return a[columnName]() < b[columnName]() ? -1 : 1;
-        });
+      this.items.reverse(function (a, b) {
+          return a[columnName]() < b[columnName]() ? -1 : 1;
+      });
     };
-    //sets the up/down sorting icons on the column
     this.sortByCSS = function (columnName) {
-        if (columnName !== undefined && columnName !== '') {
-            return this.lastSortedColumn() == columnName ? (this.lastSort() == 'Asc' ? this.sortByClassAsc : this.sortByClassDesc) : this.sortByClass;
-        } else {
-            return '';
-        }
+      //sets the up/down sorting icons on the column
+      if (columnName !== undefined && columnName !== '') {
+          return this.lastSortedColumn() == columnName ? (this.lastSort() == 'Asc' ? this.sortByClassAsc : this.sortByClassDesc) : this.sortByClass;
+      } else {
+          return '';
+      }
     };
-  //End My grid  -------------------------------- //
+
+    // UI Display Formatting Observables and Computeds
+    ///////////////////////////////////////////////////////////////
+    this.isGroceryShopping = ko.observable(false);
+    this.formatDecimal = function(value) {
+      //NOTE: use when displaying in UI only! Converts numbers to strings!
+      //forces decimal numbers to have at least two decimal points
+      return value.toFixed(2);
+    };
     this.setGroceryShopping = function (state) {
       this.isGroceryShopping(state);
-    };
-    this.resetShopping = function () {
-      if(confirm("This will reset your grocery list. Are you sure? (Y/N)")) {
-        this.items.removeAll();
-      }
     };
     this.totalCalories = ko.computed(function(){
       var totalCals = 0;
@@ -160,7 +162,9 @@ var snapShopper = (function () {
       return this.weeklyCalories() - this.totalCalories();
     }, this);
   };
-  //add functionality to the viewmodel
+
+  // Extensions/Extenders - add functionality to the viewmodel and observables
+  ///////////////////////////////////////////////////////////////
   ko.utils.extend(myViewModel.prototype, {
       //select an item and make a copy of it for editing
       selectItem: function(item) {
@@ -209,6 +213,11 @@ var snapShopper = (function () {
           this.items.remove(this.selectedItem());
           this.revertItem();
         }
+      },
+      removeAllItems: function() {
+        if(confirm("This will reset your grocery list. Are you sure? (Y/N)")) {
+          this.items.removeAll();
+        }
       }
   });
   //add to observables to intercept values and force them to be numeric.
@@ -238,8 +247,26 @@ var snapShopper = (function () {
     //return the new computed observable
     return result;
   };
+  ko.extenders.required = function(target, overrideMessage) {
+    //add some sub-observables to our observable
+    target.hasError = ko.observable();
+    target.validationMessage = ko.observable();
+
+    //define a function to do validation
+    function validate(newValue) {
+       target.hasError(newValue ? false : true);
+       target.validationMessage(newValue ? "" : overrideMessage || "This field is required");
+    }
+    //initial validation
+    validate(target());
+    //validate whenever the value changes
+    target.subscribe(validate);
+    //return the original observable
+    return target;
+  };
+
   // Public Methods, must be exposed in return statement below
-  ///////////////////////////
+  ///////////////////////////////////////////////////////////////
   var initKo = function (){
    ko.applyBindings(new myViewModel(
        [
