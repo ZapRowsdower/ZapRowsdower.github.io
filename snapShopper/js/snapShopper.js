@@ -144,7 +144,7 @@ var snapShopper = (function () {
       var total = this.totalPrice();
       var budgetCap = this.budgetCap();
       var result = Math.ceil((total/budgetCap)*100);
-      if (result > 0 && result < 100) {
+      if (result > 0 && result <= 100) {
         return result+"%";
       } else if (result > 100) return "100%";
     }, this);
