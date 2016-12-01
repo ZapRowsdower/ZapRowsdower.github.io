@@ -3,22 +3,23 @@
 //TODO: form validation
 //TODO: allow decimal entry for servings?
 //TODO: add a checkmark to mark an item as having been bought
+//TODO: save grocery item data permanently
 var snapShopper = (function () {
   // Properties
   ///////////////////////////
   var Item = function(data) {
-      this.name = ko.observable();
-      this.price = ko.observable().extend({ numeric: 2 });//rounds to two decimals
-      this.calories = ko.observable().extend({ numeric: 1 });//rounds to whole num
-      this.servings = ko.observable().extend({ numeric: 2 });
-      //NOTE: not using computed here because we don't need instant updating.
-      //Values are only set when using update method
-      this.totalItemCals = ko.observable();
-      this.formattedPrice = ko.computed(function(){
-        return "$"+this.price().toFixed(2);
-      }, this);
-      //populate our model with the initial data
-      this.update(data);
+    this.name = ko.observable();
+    this.price = ko.observable().extend({ numeric: 2 });//rounds to two decimals
+    this.calories = ko.observable().extend({ numeric: 1 });//rounds to whole num
+    this.servings = ko.observable().extend({ numeric: 2 });
+    //NOTE: not using computed here because we don't need instant updating.
+    //Values are only set when using update method
+    this.totalItemCals = ko.observable();
+    this.formattedPrice = ko.computed(function(){
+      return "$"+this.price().toFixed(2);
+    }, this);
+    //populate our model with the initial data
+    this.update(data);
   };
   Item.prototype.update = function(data) {
     if(data){
@@ -28,17 +29,16 @@ var snapShopper = (function () {
       this.servings(data.servings);
       this.totalItemCals(this.calories()*this.servings());
     } else {
-      this.name("Edit Me!");
-      this.price(0);
-      this.calories(0);
-      this.servings(0);
+      this.name("");
+      this.price(null);
+      this.calories(null);
+      this.servings(null);
       this.totalItemCals(this.calories()*this.servings());
     }
   };
   // Private Methods
   //////////////////////////
   var myViewModel = function (items){// the view model needs to be a function so that computed observables can work
-      var self = this;
     //DATA ---------------------------------------------- //
     this.items = ko.observableArray(ko.utils.arrayMap(items, function(data) {
       return new Item(data);
@@ -72,40 +72,40 @@ var snapShopper = (function () {
 
     this.sortBy = function (columnName) {
       //if the last sorted column isn't the current column...
-        if (self.lastSortedColumn() != columnName) {
-          //sort this column by ascending
-            self.sortByAsc(columnName);
-          //set the last sorted column to this column
-            self.lastSortedColumn(columnName);
-          //set the last sorted method to ascending
-            self.lastSort('Asc');
+      if (this.lastSortedColumn() != columnName) {
+        //sort this column by ascending
+        this.sortByAsc(columnName);
+        //set the last sorted column to this column
+        this.lastSortedColumn(columnName);
+        //set the last sorted method to ascending
+        this.lastSort('Asc');
       //if the last sort method was ascending...
-        } else if (self.lastSort() == 'Asc') {
-          //sort this column by descending
-            self.sortByDesc(columnName);
-          //set the last sort method used to descending
-            self.lastSort('Desc');
-        } else {
-      //if no other condition is met, just sort this column by ascending
-            self.sortByAsc(columnName);
-            self.lastSort('Asc');
-        }
+    } else if (this.lastSort() == 'Asc') {
+        //sort this column by descending
+        this.sortByDesc(columnName);
+        //set the last sort method used to descending
+        this.lastSort('Desc');
+      } else {
+        //if no other condition is met, just sort this column by ascending
+        this.sortByAsc(columnName);
+        this.lastSort('Asc');
+      }
     };
     this.sortByAsc = function (columnName) {
       //TODO: abstract the array being sorted so this can be reused elsewhere
-        self.items.sort(function (a, b) {
+        this.items.sort(function (a, b) {
             return a[columnName]() < b[columnName]() ? -1 : 1;
         });
     };
     this.sortByDesc = function (columnName) {
-        self.items.reverse(function (a, b) {
+        this.items.reverse(function (a, b) {
             return a[columnName]() < b[columnName]() ? -1 : 1;
         });
     };
     //sets the up/down sorting icons on the column
     this.sortByCSS = function (columnName) {
         if (columnName !== undefined && columnName !== '') {
-            return self.lastSortedColumn() == columnName ? (self.lastSort() == 'Asc' ? self.sortByClassAsc : self.sortByClassDesc) : self.sortByClass;
+            return this.lastSortedColumn() == columnName ? (this.lastSort() == 'Asc' ? this.sortByClassAsc : this.sortByClassDesc) : this.sortByClass;
         } else {
             return '';
         }
@@ -135,7 +135,7 @@ var snapShopper = (function () {
       return totalCost;
     }, this);
     this.moneyLeft = ko.computed(function(){
-      return this.formatDecimal(this.budgetCap() - this.totalPrice());
+      return "$"+this.formatDecimal(this.budgetCap() - this.totalPrice());
     }, this);
     this.totalMoneyPercent = ko.computed(function(){
       var total = this.totalPrice();
@@ -192,6 +192,7 @@ var snapShopper = (function () {
         var newItem = new Item();
         newItem.update();
         this.items.unshift(newItem);
+        return newItem;
         // this.selectItem(newItem);
       },
       removeItem: function(item) {
@@ -199,7 +200,6 @@ var snapShopper = (function () {
         //see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness
         //if we haven't opened an individual item...
         if(this.selectedItem() == null) {
-          debugger;
           //...delete the item object reference being passed in
           this.items.remove(item);
         }

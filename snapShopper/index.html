@@ -13,11 +13,11 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/snapShopper.css">
   </head>
   <body>
-    <div class="container-fluid"> <!-- Required when using Boostrap grid system -->
+    <div class="container-fluid noPadding"> <!-- Required when using Boostrap grid system -->
       <header id="top" class="top-target">
         <h1 class="outline nocontent">SNAP Shopper Application</h1>
       </header>
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-inverse">
         <h2 class="outline nocontent">SNAP Shopper Navigation Bar</h2>
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
@@ -39,39 +39,37 @@
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
-      <section class="col-xs-12 text-center" data-bind="visible: !isGroceryShopping()">
+      <section class="col-xs-12 text-center noPadding" data-bind="visible: !isGroceryShopping()">
         <h2>SNAP Shopper</h2>
-        <p>A grocery shopping app on a strict budget</p>
+        <p>Grocery shopping on a four dollar a day budget</p>
         <button class="btn-primary h3" data-bind="click: function() {setGroceryShopping(true)}">Get Started!</button>
       </section>
-      <section class="col-xs-12" data-bind="visible: isGroceryShopping() && itemForEditing() === null">
-        <div class="col-xs-10">
-          <h3 class="inline h4 text-center">My Groceries: $<span data-bind="text: totalPrice"></span></h3>
+      <section class="col-xs-12 noPadding" data-bind="visible: isGroceryShopping() && itemForEditing() === null">
+        <div class="col-xs-10 text-left">
+          <h3 class="h4">My Bill: $<span data-bind="text: totalPrice"></span></h3>
         </div>
-        <div class="col-xs-2 text-center">
+        <div class="col-xs-2 text-left">
           <i class="fa fa-2x fa-times-circle clickable" aria-hidden="true" data-bind="click: function(){setGroceryShopping(false)}"></i>
         </div>
         <br>
-        <div class="col-xs-12">
-          <!-- <p class="col-xs-6">
-            Total Cals: <span data-bind="text: totalCalories"></span>
-            <br>
-          </p> -->
-          <p class="col-xs-6">Calories Needed:
+        <div class="col-xs-12 noPadding" id="divInfoArea">
+          <div class="col-xs-6">
+            <span>Money Left:</span>
+            <span data-bind="text: moneyLeft"></span>
+            <span class="progressBarBg"><span data-bind="style:{width:totalMoneyPercent}" class="progressBarFill">&nbsp;</span></span>
+          </div>
+          <div class="col-xs-6">
+            <span>Calories Needed:</span>
             <span data-bind="text: caloriesLeft"></span>
             <span class="progressBarBg"><span data-bind="style:{width:totalCaloriesPercent}" class="progressBarFill">&nbsp;</span></span>
-          </p>
-          <!-- <p class="col-xs-6">Total Spent: $<span data-bind="text: totalPrice"></span></p> -->
-          <p class="col-xs-6">Money Left: $<span data-bind="text: moneyLeft"></span>
-            <span class="progressBarBg"><span data-bind="style:{width:totalMoneyPercent}"  class="progressBarFill">&nbsp;</span></span>
-          </p>
+          </div>
           <br>
         </div>
-        <div class="col-xs-12 text-center">
-          <div class="clickable btn-lg" data-bind="click: createItem">
+        <div class="col-xs-12 text-center noPadding">
+          <button class="clickable btn-block btn-lg btn-primary" title="Add New Item" data-bind="click: function() {selectItem(createItem())}">
             <i class="fa fa-lg fa-plus-circle"></i><span> Add New Item</span>
-          </div>
-          <table class="table table-striped table-hover text-left">
+          </button>
+          <table class="table text-left">
             <thead>
               <th class="clickable" data-bind="click: function(){sortBy('name')}">
                 Name
@@ -82,50 +80,55 @@
                 <i data-bind="css:sortByCSS('price')">&nbsp;</i>
               </th>
               <th class="clickable" data-bind="click: function(){sortBy('calories')}">
-                Cals
+                Calories
                 <i data-bind="css:sortByCSS('calories')">&nbsp;</i>
               </th>
               <th></th>
             </thead>
             <tbody data-bind="template: {name: 'itemTemplate', foreach: items}"></tbody>
           </table>
-          <button class="btn-danger" data-bind="click: resetShopping">Clear List</button>
+          <button class="col-xs-6 btn-danger" title="Clear List Button" data-bind="click: resetShopping">
+            <i class="fa fa-lg fa-trash-o">&nbsp;</i>
+            Clear List
+          </button>
+          <button class="col-xs-6 btn-primary" title="Close Grocery List Button" data-bind="click: function(){setGroceryShopping(false)}">
+            <i class="fa fa-lg fa-times-circle clickable" aria-hidden="true"></i>
+            Close
+          </button>
         </div>
       </section>
-      <section class="col-xs-12" data-bind="with: itemForEditing">
+      <section class="col-xs-12 noPadding" data-bind="with: itemForEditing">
         <div class="col-xs-10 text-center">
           <h3 class="inline h4">Add New Grocery Item</h3>
         </div>
         <div class="col-xs-2">
-          <i class="fa fa-2x fa-times-circle clickable" aria-hidden="true" data-bind="click: $parent.revertItem"></i>
+          <i class="fa fa-2x fa-times-circle clickable" aria-hidden="true" data-bind="visible: $data.name().length === 0, click: $parent.removeItem"></i>
+          <i class="fa fa-2x fa-times-circle clickable" aria-hidden="true" data-bind="visible: $data.name().length > 0, click: $parent.revertItem"></i>
         </div>
         <div class="col-xs-12 text-center" >
           <label>*Item Name</label>
           <br>
-          <span>&nbsp;<input type="text" placeholder="Potatoes" required data-bind="value: name"></span>
+          <span>&nbsp;<input type="text" placeholder="Enter an item name" required data-bind="textInput: name"></span>
           <br>
-          <label>*Price</label>
+          <label>Price</label>
           <br>
           <!-- TODO: price validation  -->
           <span>$<input type="number" step=".25" placeholder="1.00" inputmode="numeric" pattern="\d+(\.\d*)?" data-bind="value: price"></span>
           <br>
-          <label>*Calories Per Serving</label>
+          <label>Calories Per Serving</label>
           <br>
           <span>&nbsp;<input type="number" step="100" placeholder="1100" inputmode="numeric" pattern="[0-9]*" data-bind="value: calories"></span>
           <br>
-          <label>*Total Servings</label>
+          <label>Total Servings</label>
           <br>
           <span>&nbsp;<input type="number" step="5" placeholder="10" inputmode="numeric" pattern="[0-9]*" data-bind="value: servings"></span>
           <br>
           <br>
-          <button class="btn-primary" type="submit" data-bind="click: $parent.acceptItem">
-            <i class="fa fa-check">&nbsp;</i>Save Item
+          <button class="btn-primary btn-lg" type="submit" data-bind="click: $parent.acceptItem, visible: $data.name().length > 0" title="Save Item Button" >
+            <i class="fa fa-lg fa-check">&nbsp;</i>Save Item
           </button>
-          <button class="btn-danger" data-bind="click: $parent.revertItem">
-            <i class="fa fa-times">&nbsp;</i>Cancel
-          </button>
-          <button class="btn-danger" data-bind="click: $parent.removeItem">
-            <i class="fa fa-trash-o">&nbsp;</i>Delete
+          <button class="btn-danger btn-lg" data-bind="click: $parent.removeItem" title="Delete Item Button">
+            <i class="fa fa-lg fa-trash-o">&nbsp;</i>Delete
           </button>
         </div>
       </section>
@@ -144,7 +147,7 @@
         <span>Total:<p data-bind="text: totalItemCals"></p></span>
       </td>
       <td>
-        <p data-bind="click: $parent.removeItem">Delete</p>
+        <button class="btn-danger"><i title="Delete Item" class="fa fa-lg fa-trash-o clickable" data-bind="click: $parent.removeItem"></i></button>
       </td>
     </tr>
   </script>

@@ -1,7 +1,21 @@
+button:disabled {
+  background-color: #ccc; }
+button:hover {
+  background-color: !important #ccc; }
+
+body, nav {
+  background-color: #093044;
+  color: #fff; }
+
+input {
+  border: none;
+  background-color: #051a25;
+  font-size: 16px; }
+
 .clickable {
   cursor: pointer; }
   .clickable:active {
-    background-color: #4c4c4c;
+    background-color: #0d789f;
     color: #fff; }
 
 .inline {
@@ -20,5 +34,15 @@
   background-color: #ccc;
   display: inline-block;
   float: left; }
+
+.noPadding {
+  padding: 0; }
+
+.table {
+  margin-bottom: 0;
+  background-color: #051a25; }
+
+#divInfoArea {
+  margin-bottom: 3%; }
 
 /*# sourceMappingURL=snapShopper.css.map */
