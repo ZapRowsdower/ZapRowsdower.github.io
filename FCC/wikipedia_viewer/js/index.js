@@ -23,7 +23,6 @@ var searchWiki = function(searchTxt) {
     },
     success: function(data) {
       $divLoadSpinner.hide();
-      console.log(data);
       buildResults(data);
     }
   });
