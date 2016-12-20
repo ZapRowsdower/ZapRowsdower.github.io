@@ -115,7 +115,9 @@ var calculatorModule = (function () {
     displayUI: document.querySelector('#displayNumbers'),
     numBtns: document.querySelector('.Calculator'),
     debugCalculatorState: function () {
-      console.log(calculator);
+      if(console){
+        console.log(calculator);
+      }
     },
     setCalcDisplay: function (number) {
       view.displayUI.value = number;
@@ -124,7 +126,6 @@ var calculatorModule = (function () {
       view.displayUI.value = '';
     },
     operatorKeyPushed: function (operator){
-      debugger;
       //convert ascii characters for division/muliplication to JS equivalents
       if(operator.charCodeAt(0) === 215) {
         operator = "*";
@@ -158,7 +159,6 @@ var calculatorModule = (function () {
             //make sure the number is no greater than a billion
             var currentNumLen = handlers.getNumber();
             if(currentNumLen.length < 9) {
-                debugger;
                 if(handlers.getNumber() === "0") handlers.setNumber('');
                 handlers.appendNumber(elementClickedVal);
             //user is trying to enter a number > billion so override user entry
@@ -169,7 +169,6 @@ var calculatorModule = (function () {
       } else if (elementClicked.classList.contains("operator") && handlers.getNumber() !=="0" || elementClicked.classList.contains("operator") && handlers.getAnswer()) {
           //if there's an answer, use that as the number to operate on
           if(handlers.getAnswer()) {
-            debugger;
             handlers.setNumber(handlers.getAnswer());
             handlers.clearAnswer();
           }
