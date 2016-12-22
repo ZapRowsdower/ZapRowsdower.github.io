@@ -28,15 +28,16 @@ body {
   margin-top: 5%;
 }
 .by a {
-  color: #ccc;
+  color: #34ffff;
 }
-
 .preload {
   display: none;
-  background: url(https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13474940_10207032179978446_7857208768475106145_o.jpg) no-repeat -9999px -9999px, url(https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13443057_10207032179338430_8034999766599052217_o.jpg) no-repeat -9999px -9999px, url(https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13412189_10207032180138450_454572012004838220_o.jpg) no-repeat -9999px -9999px, url(https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13443057_10207032179338430_8034999766599052217_o.jpg) no-repeat -9999px -9999px, url(https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13443092_10207032228579661_4147038425955037306_o.jpg) no-repeat -9999px -9999px;
+  background: url("../img/beach.jpg") no-repeat -9999px -9999px, url("../img/sonora.jpg") no-repeat -9999px -9999px, url("../img/stars.jpg") no-repeat -9999px -9999px, url("../img/glacier_peak.jpg") no-repeat -9999px -9999px;
 }
 
 #btnNextQuote {
+  text-align: center;
+  -webkit-backdrop-filter: blur(3px);
   -webkit-transition: background-color 2s;
   transition: background-color 2s;
   border-radius: 0;

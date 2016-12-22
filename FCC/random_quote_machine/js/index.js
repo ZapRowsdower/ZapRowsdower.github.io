@@ -82,11 +82,10 @@ var quotes = [
   },
 ],
 images = [
-      "https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13474940_10207032179978446_7857208768475106145_o.jpg",
-      "https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13443057_10207032179338430_8034999766599052217_o.jpg",
-      "https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13412189_10207032180138450_454572012004838220_o.jpg",
-"https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13433081_10207032179498434_5485070160710204803_o.jpg",
-  "https://scontent-iad3-1.xx.fbcdn.net/t31.0-8/13443092_10207032228579661_4147038425955037306_o.jpg"
+      "../random_quote_machine/img/beach.jpg",
+      "../random_quote_machine/img/sonora.jpg",
+      "../random_quote_machine/img/stars.jpg",
+      "../random_quote_machine/img/glacier_peak.jpg"
 ],
 styles = [
   {
@@ -111,6 +110,14 @@ styles = [
     "buttonStyle":{
       "background-color":"rgba(255, 255, 255,0.1)",
       "color":"#efefef"
+    }
+  },
+  {
+    "background-image": "url("+images[3]+")",
+    "color":"#333",
+    "buttonStyle":{
+      "background-color":"rgba(15,0,216,0.25)",
+      "color":"#fff"
     }
   }
 ],
@@ -163,7 +170,7 @@ $(quoteAuthor).click(function(){openTwitter();});
 $(document).ready(function () {
   displayQuote();
   changeTheme(styles[0]);
-  setInterval(cycleStyle, 15000);
+  setInterval(cycleStyle, 8000);
 });
 $(document).keydown(function (event) {
   if (event.which === 39 || event.which === 37) {
