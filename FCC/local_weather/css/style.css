@@ -89,22 +89,22 @@ body {
 }
 
 .wx-partlyCloudy {
-  background: url(https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/13495188_10207087437799857_8677994268778670253_n.jpg?oh=58112ae00662b09aa4a89e72943f130c&oe=58A00ECC);
+  background: url("../img/partly_cloudy.jpg");
   color: #fff;
 }
 
 .wx-cloudy {
-  background: url(https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/13507282_10207119463720485_7552795810258072463_n.jpg?oh=8867ca968c657288788c31e594c361d6&oe=58A1B247);
+  background: url("../img/cloudy.jpg");
   color: #fff;
 }
 
 .wx-rain {
-  background: url(https://scontent-ord1-1.xx.fbcdn.net/t31.0-8/fr/cp0/e15/q65/13528175_10207116325562033_5188733912518032057_o.jpg?efg=eyJpIjoidCJ9);
+  background: url("../img/rain.jpg");
   color: #efefef;
 }
 
 .wx-snow {
-  background: url(https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/13529110_10207128249340120_4312646047863427477_n.jpg?oh=5ab51851795c2c24c49b928eeff29396&oe=586C26E9);
+  background: url("../img/snow.jpg");
   color: #fff;
 }
 
@@ -119,5 +119,5 @@ body {
 }
 
 .preload {
-  background: url(https://scontent-ord1-1.xx.fbcdn.net/v/t1.0-9/fr/cp0/e15/q65/13495188_10207087437799857_8677994268778670253_n.jpg?efg=eyJpIjoidCJ9&oh=b606b55083a2cf8703f242999953165b&oe=57F408C3), url(https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/fr/cp0/e15/q65/13507282_10207119463720485_7552795810258072463_n.jpg?efg=eyJpIjoidCJ9&oh=5b475733e87362648f44d8b948aed0ea&oe=57F66448), url(https://scontent-ord1-1.xx.fbcdn.net/t31.0-8/fr/cp0/e15/q65/13528175_10207116325562033_5188733912518032057_o.jpg?efg=eyJpIjoidCJ9), url(https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/13529110_10207128249340120_4312646047863427477_n.jpg?oh=fdacaa9ff7471f0b8d148d531e212a21&oe=57F57FE9);
+  background: url("../img/partly_cloudy.jpg"), url("../img/cloudy.jpg"), url("../img/rain.jpg"), url("../img/snow.jpg");
 }
