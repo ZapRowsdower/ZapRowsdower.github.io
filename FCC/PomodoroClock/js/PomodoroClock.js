@@ -4,22 +4,30 @@ var PomodoroClock = (function () {
   // Properties
   ///////////////////////////
   //UI hooks
+  //inputs
   var sessionInput = document.querySelector("#session");
   var minutesInputVal = sessionInput.valueAsNumber;
   var breakInput = document.querySelector("#break");
   var breakInputVal = breakInput.valueAsNumber;
+
+  //buttons
   var btnStart = document.querySelector("#btnStart");
   var btnStop = document.querySelector("#btnStop");
-  var timer = document.querySelector(".timer");
-  var stopBtn = document.querySelector(".fa-volume-off");
-  var playBtn = document.querySelector(".fa-volume-up");
+  var btnStopAudio = document.querySelector(".fa-volume-off");
+  var btnPlayAudioBtn = document.querySelector(".fa-volume-up");
+
+
+  //audio
   var audioChimer = document.querySelector(".chimer");
   var audioChimerLong = document.querySelector(".long");
   var audioTicker = document.querySelector(".ticker");
 
+  //display
+  var timer = document.querySelector(".timer");
+
   //timer data and initilization
   var minutes = 25;
-  var seconds = 12;
+  var seconds = 60;
   var breakLength = 5;
   var intervalId = 0;
   var isOnBreak = false;
@@ -57,12 +65,12 @@ var PomodoroClock = (function () {
       setTimerText(minutes+":"+setStringZeroes(seconds)+" on break: "+isOnBreak);
       if(seconds === 0) {
         minutes--;
-        seconds = 59;
+        seconds = 60;
       }
     } else {
       isOnBreak = !isOnBreak;
       stopInterval(intervalId);
-      intervalId = startInterval();
+      startInterval();
     }
   };
   var setTimerText = function(text) {
@@ -97,12 +105,12 @@ var PomodoroClock = (function () {
     minutes = sessionInput.valueAsNumber;
     setTimerText(minutes+":00");
   });
-  stopBtn.addEventListener("click", function(event){
+  btnStopAudio.addEventListener("click", function(event){
     stopSound(audioTicker);
     stopSound(audioChimer);
     stopSound(audioChimerLong);
   });
-  playBtn.addEventListener("click", function(event){
+  btnPlayAudioBtn.addEventListener("click", function(event){
     if(isOnBreak === false) {
       startSound(audioTicker);
     }
