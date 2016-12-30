@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class="container-fluid"> <!-- Required when using Boostrap grid system -->
-      <div class="col-xs-12 bg-success controls">
+      <div class="col-xs-12 controls">
         <label for="session">Session Length in Minutes</label>
         <input id="session" type="number" value="25" min="1" max="120">
         <label for="session">Break Length in Minutes</label>
@@ -22,9 +22,13 @@
         <button value="start" id="btnStart">Start</button>
         <button value="stop" id="btnStop">Stop</button>
       </div>
-      <div class="col-xs-12 bg-success clock">
+      <div class="col-xs-12 clock">
         <h3 class="timer">25:00</h3>
         <h4 class="activity"></h4>
+        <div class="my-loader">
+          <div class="spinner">
+          </div>
+        </div>
       </div>
       <p>Mute Audio &nbsp;<i class="fa fa-2x fa-volume-off"></i></p>
       <p>Play Audio &nbsp;<i class="fa fa-2x fa-volume-up"></i></p>

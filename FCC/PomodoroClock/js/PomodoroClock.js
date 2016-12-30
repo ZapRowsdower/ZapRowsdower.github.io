@@ -16,7 +16,6 @@ var PomodoroClock = (function () {
   var btnStopAudio = document.querySelector(".fa-volume-off");
   var btnPlayAudioBtn = document.querySelector(".fa-volume-up");
 
-
   //audio
   var audioChimer = document.querySelector(".chimer");
   var audioChimerLong = document.querySelector(".long");
@@ -24,6 +23,7 @@ var PomodoroClock = (function () {
 
   //display
   var timer = document.querySelector(".timer");
+  var spinner = document.querySelector(".spinner");
 
   //timer data and initilization
   var minutes = 25;
@@ -40,14 +40,33 @@ var PomodoroClock = (function () {
     else strSecs = number.toString();
     return strSecs;
   };
+  var setSpinnerDuration = function (time) {
+    var timeInSecs = time * seconds;
+    spinner.style.animationDuration = timeInSecs+"s";
+  };
+  var startSpinnerAnim = function () {
+    spinner.style.animationPlayState = "running";
+  };
+  var stopSpinnerAnim = function () {
+    spinner.style.animationPlayState = "paused";
+  };
+  var resetSpinner = function () {
+    //NOTE: CSS animations are weird with restarting; following this advice:
+    // https://css-tricks.com/restart-css-animation/
+    spinner = document.querySelector(".spinner");
+    var newone = spinner.cloneNode(true);
+    spinner.parentNode.replaceChild(newone, spinner);
+  };
   var startInterval = function () {
     //TODO: TERRIBLE. REFACTOR.
     if(isOnBreak === false) {
-      startSound(audioChimer);
-      startSound(audioTicker);
       minutesInputVal = sessionInput.valueAsNumber;
+      setSpinnerDuration(minutesInputVal);
+      startSpinnerAnim();
       minutes = --minutesInputVal;
       intervalId = setInterval(function(){countDown();}, 1000);
+      startSound(audioChimer);
+      startSound(audioTicker);
     } else if (isOnBreak === true) {
       startSound(audioChimerLong);
       breakInputVal = breakInput.valueAsNumber;
@@ -58,6 +77,7 @@ var PomodoroClock = (function () {
   var stopInterval = function (intervalId) {
     clearInterval(intervalId);
     stopSound(audioTicker);
+    stopSpinnerAnim();
   };
   var countDown = function () {
     if(minutes >= 0){
@@ -91,14 +111,11 @@ var PomodoroClock = (function () {
     if(intervalId > 0) {
       stopInterval(intervalId);
     }
-    //get current input value
-    var currInputVal = sessionInput.valueAsNumber;
     startInterval();
   });
   btnStop.addEventListener("click", function(event){
-    //get current input value
-    var currInputVal = sessionInput.valueAsNumber;
     stopInterval(intervalId);
+    stopSpinnerAnim();
   });
   sessionInput.addEventListener("click", function(event){
     if(intervalId > 0) return;
@@ -114,6 +131,10 @@ var PomodoroClock = (function () {
     if(isOnBreak === false) {
       startSound(audioTicker);
     }
+  });
+  spinner.addEventListener("animationend", function(event){
+    stopSpinnerAnim();
+    // resetSpinner();
   });
   // Public Methods, must be exposed in return statement below
   ///////////////////////////
