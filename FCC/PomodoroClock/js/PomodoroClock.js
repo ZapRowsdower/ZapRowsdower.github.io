@@ -45,9 +45,22 @@ var PomodoroClock = (function () {
     spinner.style.animationDuration = timeInSecs+"s";
   };
   var startSpinnerAnim = function () {
-    spinner.style.animationPlayState = "running";
+    if(isOnBreak === false) {
+      spinner.classList.add("animate-normal");
+      spinner.classList.remove("animate-reverse");
+    } else  {
+      spinner.classList.add("animate-reverse");
+      spinner.classList.remove("animate-normal");
+    }
+    spinner.classList.add("radar");
   };
   var stopSpinnerAnim = function () {
+    //NOTE: setting animationPlayState is unreliable so removing animation class
+    //to stop animation
+    spinner.classList.remove("radar");
+    // spinner.style.animationPlayState = "paused";
+  };
+  var pauseSpinnerAnim = function () {
     spinner.style.animationPlayState = "paused";
   };
   var resetSpinner = function () {
@@ -70,6 +83,8 @@ var PomodoroClock = (function () {
     } else if (isOnBreak === true) {
       startSound(audioChimerLong);
       breakInputVal = breakInput.valueAsNumber;
+      setSpinnerDuration(breakInputVal);
+      startSpinnerAnim();
       minutes = --breakInputVal;
       intervalId = setInterval(function(){countDown();}, 1000);
     }
@@ -115,7 +130,6 @@ var PomodoroClock = (function () {
   });
   btnStop.addEventListener("click", function(event){
     stopInterval(intervalId);
-    stopSpinnerAnim();
   });
   sessionInput.addEventListener("click", function(event){
     if(intervalId > 0) return;
@@ -134,7 +148,6 @@ var PomodoroClock = (function () {
   });
   spinner.addEventListener("animationend", function(event){
     stopSpinnerAnim();
-    // resetSpinner();
   });
   // Public Methods, must be exposed in return statement below
   ///////////////////////////
