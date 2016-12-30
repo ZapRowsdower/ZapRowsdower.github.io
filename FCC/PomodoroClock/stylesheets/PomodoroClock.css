@@ -1,10 +1,26 @@
 body{
-  background-color: #000;
+  background-color: #25395C;
   color: #fff;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 input, button {
-  color: #000;
+  color: #fff;
+  width: 50%;
+  font-size: 2em;
+  background-color: #1f1d1d;
+  text-align: center;
+  border: none;
+}
+
+input {
+  box-shadow: inset 0 0 1em 0em #000;
+  border: 0.1em solid #000;
+  border-radius: 10px;
+}
+
+i {
+  cursor: pointer;
 }
 
 .circle {
@@ -12,30 +28,31 @@ input, button {
   border-radius: 50%;
   border: 0.1em solid #fff;
   box-shadow: inset 0 0 10em 0em #00e8ff;
-  width: 10em;
-  height: 10em;
+  width: 20em;
+  height: 20em;
 }
 
 .spinner {
   position: relative;
-  top: 4.9em;
-  right: 0.1em;
+  top: 9.8em;
+  right: 0.2em;
+  /*top: 4.9em;
+  right: 0.1em;*/
   border-top: 0.1em solid #fff;
   box-shadow: 0 0.3em 0.7em #00e8ff;
-  width: 5em;
+  width: 10em;
+  /*width: 5em;*/
   transform: rotate(90deg);
   transform-origin: top right;
 }
 
-@keyframes radar {
-  0% {
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
-  }
-  100% {
-    -webkit-transform: rotate(450deg);
-    transform: rotate(450deg);
-  }
+.timer-controls{
+  margin-top: 70%;
+}
+
+.timer-controls i {
+  transition: display 1s;
+  color: rgba(0,255,255,0.75);
 }
 
 .radar {
@@ -49,4 +66,22 @@ input, button {
 
 .animate-reverse {
   animation-direction: reverse;
+}
+
+.state.audio {
+  color: rgba(0,0,0,0);
+  transition: color 2s;
+}
+
+#btnStop, .fa-volume-off { display: none;}
+
+@keyframes radar {
+  0% {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  100% {
+    -webkit-transform: rotate(450deg);
+    transform: rotate(450deg);
+  }
 }

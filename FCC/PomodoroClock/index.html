@@ -8,30 +8,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>PomodoroClock</title>
     <!-- Required: Boostrap CSS file -->
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Open+Sans|Source+Sans+Pro" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="stylesheets/PomodoroClock.css">
   </head>
   <body>
-    <div class="container-fluid"> <!-- Required when using Boostrap grid system -->
-      <div class="col-xs-12 controls">
-        <label for="session">Session Length in Minutes</label>
-        <input id="session" type="number" value="25" min="1" max="120">
-        <label for="session">Break Length in Minutes</label>
-        <input id="break" type="number" value="5" min="1" max="30">
-        <button value="start" id="btnStart">Start</button>
-        <button value="stop" id="btnStop">Stop</button>
-      </div>
-      <div class="col-xs-12 clock">
-        <h3 class="timer">25:00</h3>
-        <h4 class="activity"></h4>
-        <div class="circle">
-          <div class="spinner">
-          </div>
+    <div class="container-fluid">
+      <h1 class="text-center">Pomodoro<em><strong>!</strong></em></h1>
+      <div class="col-xs-12 controls text-center">
+        <div class="col-xs-6">
+          <label for="session">Working Minutes</label>
+          <br>
+          <input id="session" type="number" value="25" min="1" max="120">
+        </div>
+        <div class="col-xs-6">
+          <label for="session">Break Minutes</label>
+          <br>
+          <input id="break" type="number" value="5" min="1" max="30">
         </div>
       </div>
-      <p>Mute Audio &nbsp;<i class="fa fa-2x fa-volume-off"></i></p>
-      <p>Play Audio &nbsp;<i class="fa fa-2x fa-volume-up"></i></p>
+      <div class="col-xs-12 clock text-center">
+        <h3 class="timer">25:00</h3>
+        <h4 class="state cycle"></h4>
+        <div class="circle">
+          <div class="spinner"></div>
+          <div class="timer-controls">
+            <i title="Start Timer" class="fa fa-3x fa-play" data-other="#btnStop" id="btnStart"></i>
+            <i title="Stop and Reset Timer" class="fa fa-3x fa-refresh" data-other="#btnStart" id="btnStop"></i>
+            <!-- <i title="Pause Timer" class="fa fa-2x fa-pause" id="btnPause"></i> -->
+          </div>
+        </div>
+        <br>
+        <i class="fa fa-2x fa-volume-off" title ="Click to Play Audio" data-other=".fa-volume-up"></i>
+        <i class="fa fa-2x fa-volume-up" title ="Click to Mute Audio" data-other=".fa-volume-off"></i>
+        <h4 class="state audio"></h4>
+      </div>
       <audio class="ticker" src="sounds/tick.m4a" loop>
         <p>Your browser does not support the <code>audio</code> element.</p>
       </audio>
