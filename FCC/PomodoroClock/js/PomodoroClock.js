@@ -6,9 +6,9 @@ var PomodoroClock = (function () {
   //UI hooks
   //inputs
   var sessionInput = document.querySelector("#session");
-  var minutesInputVal = sessionInput.valueAsNumber;
+  var minutesInputVal = parseInt(sessionInput.value);
   var breakInput = document.querySelector("#break");
-  var breakInputVal = breakInput.valueAsNumber;
+  var breakInputVal = parseInt(breakInput.value);
 
   //buttons
   var btnStart = document.querySelector("#btnStart");
@@ -101,7 +101,7 @@ var PomodoroClock = (function () {
   // Private Methods
   ///////////////////////////
   var sanitizeInput = function (input) {
-    var sanitize = input.valueAsNumber;
+    var sanitize = parseInt(input.value);
     if(isNaN(sanitize) || sanitize === 0) {
       input.value = 0;
     } else if (sanitize > 120) {
@@ -116,7 +116,7 @@ var PomodoroClock = (function () {
     //TODO: REFACTOR.
     if(isOnBreak === false) {
       //get minutes from input
-      minutesInputVal = sessionInput.valueAsNumber;
+      minutesInputVal = parseInt(sessionInput.value);
 
       //set animation properties based on input
       setSpinnerDuration(minutesInputVal);
@@ -130,7 +130,7 @@ var PomodoroClock = (function () {
       startSound(audioTicker);
     } else if (isOnBreak === true) {
       //get minutes from input
-      breakInputVal = breakInput.valueAsNumber;
+      breakInputVal = parseInt(breakInput.value);
 
       //set animation properties based on input
       setSpinnerDuration(breakInputVal);
@@ -166,8 +166,8 @@ var PomodoroClock = (function () {
     }
   };
   var resetTimerData = function () {
-    minutesInputVal = sessionInput.valueAsNumber;
-    breakInputVal = breakInput.valueAsNumber;
+    minutesInputVal = parseInt(sessionInput.value);
+    breakInputVal = parseInt(breakInput.value);
     minutes = minutesInputVal;
     seconds = 60;
     breakLength = breakInputVal;
@@ -197,7 +197,7 @@ var PomodoroClock = (function () {
   sessionInput.addEventListener("input", function(event){
     sanitizeInput(this);
     if(intervalId > 0) return;
-    minutes = sessionInput.valueAsNumber;
+    minutes = parseInt(sessionInput.value);
     setElemText(timer, minutes+":00");
   });
   breakInput.addEventListener("input", function(event){
