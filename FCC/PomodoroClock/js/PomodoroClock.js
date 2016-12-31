@@ -231,7 +231,9 @@ var PomodoroClock = (function () {
     //Spinner animation was inaccurate if the user was away from the tab for an extended period.
     //Clunky and weird, but animations aren't processed by the browser when the user is away for (good)
     //performance reasons.
-    setSpinnerDuration(minutes);
-    restartAnim(spinner, "clock");
+    if(intervalId > 0){
+      setSpinnerDuration(minutes);
+      restartAnim(spinner, "clock");
+    }
   });
 })();
