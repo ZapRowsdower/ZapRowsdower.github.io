@@ -6,8 +6,8 @@ body{
 
 input, button {
   color: #fff;
-  width: 50%;
-  font-size: 2em;
+  width: 100%;
+  font-size: 1.5em;
   background-color: #1f1d1d;
   text-align: center;
   border: none;
@@ -23,6 +23,14 @@ i {
   cursor: pointer;
 }
 
+a {
+  color: #00e8ff;
+}
+
+.app-title{
+  margin-top: 1%;
+}
+
 .circle {
   margin: 0 auto;
   border-radius: 50%;
@@ -35,15 +43,15 @@ i {
 .spinner {
   position: relative;
   top: 9.8em;
-  right: 0.2em;
-  /*top: 4.9em;
-  right: 0.1em;*/
   border-top: 0.1em solid #fff;
   box-shadow: 0 0.3em 0.7em #00e8ff;
-  width: 10em;
-  /*width: 5em;*/
+  width: 9.9em;
   transform: rotate(90deg);
   transform-origin: top right;
+}
+
+.timer {
+  margin-bottom: -1%;
 }
 
 .timer-controls{
@@ -65,6 +73,7 @@ i {
 }
 
 .animate-reverse {
+  -webkit-animation-direction: reverse;
   animation-direction: reverse;
 }
 
@@ -83,5 +92,36 @@ i {
   100% {
     -webkit-transform: rotate(450deg);
     transform: rotate(450deg);
+  }
+}
+
+.widerThing {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  body {
+    background-color: #142034;
+  }
+
+  input, button {
+    width:50%;
+  }
+
+  .controls{
+    font-size: 1.75em;
+  }
+
+  .timer {
+    font-size: 3em;
+    margin-bottom: -1%;
+  }
+
+  .container-fluid {
+    padding-top: 1%;
+    background-color: #25395C;
+    width: 75%;
+    height: 1000px;
+    box-shadow: 0em 1em 10em #000;
   }
 }

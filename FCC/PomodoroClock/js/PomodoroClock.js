@@ -34,6 +34,7 @@ var PomodoroClock = (function () {
   var breakLength = 5;
   var intervalId = 0;
   var isOnBreak = false;
+  var isMuted = false;
 
   // UI Methods
   ///////////////////////////
@@ -69,7 +70,7 @@ var PomodoroClock = (function () {
     el.innerText = text;
   };
   var startSound = function (audioElem) {
-    audioElem.play();
+    if(isMuted === false) audioElem.play();
   };
   var stopSound = function (audioElem) {
     audioElem.pause();
@@ -87,6 +88,18 @@ var PomodoroClock = (function () {
 
   // Private Methods
   ///////////////////////////
+  var sanitizeInput = function (input) {
+    var sanitize = input.valueAsNumber;
+    if(isNaN(sanitize) || sanitize === 0) {
+      input.value = 0;
+    } else if (sanitize > 120) {
+      input.value = 120;
+    }
+    else {
+      sanitize = Math.round(sanitize);
+      input.value = sanitize;
+    }
+  };
   var startInterval = function () {
     //TODO: REFACTOR.
     if(isOnBreak === false) {
@@ -112,10 +125,10 @@ var PomodoroClock = (function () {
     stopSpinnerAnim();
   };
   var countDown = function () {
+    isOnBreak === true ? setElemText(cycleState, "Break Time!") : setElemText(cycleState, "You're on the clock!");
     if(minutes >= 0){
       seconds--;
       setElemText(timer, minutes+":"+setStringZeroes(seconds));
-      setElemText(cycleState, "Working");
       if(seconds === 0) {
         minutes--;
         seconds = 60;
@@ -140,6 +153,8 @@ var PomodoroClock = (function () {
   ///////////////////////////
   //TODO: REFACTOR TO USE ONE EVENT LISTENER
   btnStart.addEventListener("click", function(event){
+    sanitizeInput(sessionInput);
+    sanitizeInput(breakInput);
     toggleDisplay(this);
     //singleton interval
     if(intervalId > 0) {
@@ -154,12 +169,18 @@ var PomodoroClock = (function () {
     setElemText(timer, minutes+":00");
     //TODO: update UI
   });
-  sessionInput.addEventListener("click", function(event){
+  sessionInput.addEventListener("input", function(event){
+    sanitizeInput(this);
     if(intervalId > 0) return;
     minutes = sessionInput.valueAsNumber;
     setElemText(timer, minutes+":00");
   });
+  breakInput.addEventListener("input", function(event){
+    sanitizeInput(this);
+    if(intervalId > 0) return;
+  });
   btnStopAudio.addEventListener("click", function(event){
+    isMuted = true;
     stopSound(audioTicker);
     stopSound(audioChimer);
     stopSound(audioChimerLong);
@@ -169,6 +190,7 @@ var PomodoroClock = (function () {
     setTimeout(function () {audioState.style.color = "rgba(0,0,0,0)";},2000);
   });
   btnPlayAudioBtn.addEventListener("click", function(event){
+    isMuted = false;
     if(isOnBreak === false && intervalId > 0) {
       startSound(audioTicker);
     }
