@@ -94,7 +94,8 @@ var PomodoroClock = (function () {
   var toggleDisplay = function (clickedEl) {
     var otherEl = document.querySelector(clickedEl.dataset.other);
     clickedEl.style.display = "none";
-    otherEl.style.display = "initial";
+    //NOTE: prefer 'initial' to set element default display but IE11 doesn't recognize that value
+    otherEl.style.display = "inline";
   };
 
   // Private Methods
