@@ -44,24 +44,35 @@ var PomodoroClock = (function () {
     else strSecs = number.toString();
     return strSecs;
   };
-  var setSpinnerDuration = function (time) {
-    var timeInSecs = time * seconds;
+  var setSpinnerDuration = function (minuteInput) {
+    var timeInSecs = 0;
+    if(minuteInput > 0) {
+      timeInSecs = minuteInput * seconds;
+    } else {
+      timeInSecs = seconds;
+    }
     spinner.style.animationDuration = timeInSecs+"s";
   };
   var startSpinnerAnim = function () {
+    spinner.classList.add("clock");
     if(isOnBreak === false) {
       spinner.classList.add("animate-normal");
       spinner.classList.remove("animate-reverse");
-    } else  {
+    } else {
       spinner.classList.add("animate-reverse");
       spinner.classList.remove("animate-normal");
     }
-    spinner.classList.add("radar");
   };
   var stopSpinnerAnim = function () {
     //NOTE: setting animationPlayState is unreliable so removing animation class
     //to stop animation
-    spinner.classList.remove("radar");
+    spinner.classList.remove("clock");
+  };
+  var restartAnim = function (el, animationClass) {
+    //NOTE: Restarting anim. per: https://css-tricks.com/restart-css-animation/
+    el.classList.remove(animationClass);
+    void el.offsetWidth;
+    startSpinnerAnim();
   };
   var pauseSpinnerAnim = function () {
     spinner.style.animationPlayState = "paused";
@@ -103,21 +114,35 @@ var PomodoroClock = (function () {
   var startInterval = function () {
     //TODO: REFACTOR.
     if(isOnBreak === false) {
+      //get minutes from input
       minutesInputVal = sessionInput.valueAsNumber;
+
+      //set animation properties based on input
       setSpinnerDuration(minutesInputVal);
-      startSpinnerAnim();
+
+      //set up interval
       minutes = --minutesInputVal;
       intervalId = setInterval(function(){countDown();}, 1000);
+
+      //play sounds
       startSound(audioChimer);
       startSound(audioTicker);
     } else if (isOnBreak === true) {
-      startSound(audioChimerLong);
+      //get minutes from input
       breakInputVal = breakInput.valueAsNumber;
+
+      //set animation properties based on input
       setSpinnerDuration(breakInputVal);
-      startSpinnerAnim();
+
+      //set up interval
       minutes = --breakInputVal;
       intervalId = setInterval(function(){countDown();}, 1000);
+
+      //play sounds
+      startSound(audioChimerLong);
     }
+    // startSpinnerAnim();
+    restartAnim(spinner, "clock");
   };
   var stopInterval = function (intervalId) {
     clearInterval(intervalId);
@@ -139,7 +164,7 @@ var PomodoroClock = (function () {
       startInterval();
     }
   };
-  var resetTimer = function () {
+  var resetTimerData = function () {
     minutesInputVal = sessionInput.valueAsNumber;
     breakInputVal = breakInput.valueAsNumber;
     minutes = minutesInputVal;
@@ -165,9 +190,8 @@ var PomodoroClock = (function () {
   btnStop.addEventListener("click", function(event){
     toggleDisplay(this);
     stopInterval(intervalId);
-    resetTimer();
+    resetTimerData();
     setElemText(timer, minutes+":00");
-    //TODO: update UI
   });
   sessionInput.addEventListener("input", function(event){
     sanitizeInput(this);
@@ -186,6 +210,7 @@ var PomodoroClock = (function () {
     stopSound(audioChimerLong);
     toggleDisplay(this);
     setElemText(audioState, "Audio is Off");
+    //TODO: move styling to a CSS class
     audioState.style.color = "rgba(255,255,255,255)";
     setTimeout(function () {audioState.style.color = "rgba(0,0,0,0)";},2000);
   });
@@ -196,10 +221,17 @@ var PomodoroClock = (function () {
     }
     toggleDisplay(this);
     setElemText(audioState, "Audio is On");
+    //TODO: move styling to a CSS class
     audioState.style.color = "rgba(255,255,255,255)";
     setTimeout(function () {audioState.style.color = "rgba(0,0,0,0)";},2000);
   });
-  spinner.addEventListener("animationend", function(event){
-    stopSpinnerAnim();
+  window.addEventListener("focus", function(event){
+    //NOTE: due to 'animationend' events not firing when the user is away (in another tab or app),
+    //reset the clock animation every time this application has focus.
+    //Spinner animation was inaccurate if the user was away from the tab for an extended period.
+    //Clunky and weird, but animations aren't processed by the browser when the user is away for (good)
+    //performance reasons.
+    setSpinnerDuration(minutes);
+    restartAnim(spinner, "clock");
   });
 })();

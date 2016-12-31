@@ -63,8 +63,8 @@ a {
   color: rgba(0,255,255,0.75);
 }
 
-.radar {
-  animation-name: radar;
+.clock {
+  animation-name: clock;
   animation-timing-function: linear;
 }
 
@@ -84,7 +84,7 @@ a {
 
 #btnStop, .fa-volume-off { display: none;}
 
-@keyframes radar {
+@keyframes clock {
   0% {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
@@ -93,10 +93,6 @@ a {
     -webkit-transform: rotate(450deg);
     transform: rotate(450deg);
   }
-}
-
-.widerThing {
-  display: none;
 }
 
 @media (min-width: 768px) {
