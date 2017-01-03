@@ -47,7 +47,10 @@ var PomodoroClock = (function () {
   var setSpinnerDuration = function (minuteInput) {
     var timeInSecs = 0;
     if(minuteInput > 0) {
-      timeInSecs = minuteInput * seconds;
+      for (var i = minuteInput; i > 0; i--){
+        timeInSecs +=60;
+      }
+      if(seconds < 60) timeInSecs += seconds;
     } else {
       timeInSecs = seconds;
     }
@@ -193,6 +196,8 @@ var PomodoroClock = (function () {
     stopInterval(intervalId);
     resetTimerData();
     setElemText(timer, minutes+":00");
+    //insert non-breaking(&nbsp) character to clear status area but retain layout spacing
+    setElemText(cycleState, "\xa0");
   });
   sessionInput.addEventListener("input", function(event){
     sanitizeInput(this);
@@ -233,6 +238,7 @@ var PomodoroClock = (function () {
     //Clunky and weird, but animations aren't processed by the browser when the user is away for (good)
     //performance reasons.
     if(intervalId > 0){
+      //TODO: method used in setSpinnerDuration is going to be inaccurate on focus. Fix.
       setSpinnerDuration(minutes);
       restartAnim(spinner, "clock");
     }
