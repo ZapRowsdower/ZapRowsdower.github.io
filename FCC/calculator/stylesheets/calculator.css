@@ -17,11 +17,11 @@ table.Calculator {
 	width: 100%;
   height: 368px;
 	border: 2px solid #1d1d1d;
-	-webkit-border-radius: 5px;
+  border-radius: 5px;
 	font-family: Arial, sans-serif;
 	border-spacing: 10px 10px;
 	box-shadow: 15px 7px 79px rgba(0, 0, 0, 0.65);
-  border-collapse: initial;
+  border-collapse: separate;
 }
 .Calculator tr{border: 1px solid #dfdfdf;}
 .Calculator td{
@@ -31,17 +31,11 @@ table.Calculator {
   height: 5%;
   text-align: center;
   margin: 5%;
+  border-radius: 5px;
 }
 .Display{
   white-space: nowrap;
-	background: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.05, rgb(227,244,189)),
-	color-stop(0.50, rgb(199,212,165)),
-	color-stop(0.75, rgb(227,244,189))
-	);
+  background-image:linear-gradient(to top, #e3f4bd, #c7d4a5, #f3ffda);
 	box-shadow: inset 0 0 13px #747d61;
 	border: 1px solid #f6ffe2;
 	width: 100%;
@@ -65,22 +59,20 @@ table.Calculator {
 
 /*------------ Grey Buttons ---------------*/
 .SubBtn{
-		background:-webkit-gradient(linear, left top, left bottom, from(darkGray), to(#3c3c3c));
-    background-image: -ms-linear-gradient(left top, darkGray 0%, #3c3c3c 300%);
+    background-image:linear-gradient(to top, #3c3c3c, darkGray);
 		font-size: 18.7px;
 		cursor: pointer;
 		width: 60px;
 		letter-spacing: 1px;
 		color: #fff;
 		text-shadow: #000 0px -1px 0px;
-		-webkit-border-radius: 4px;
 		box-shadow: -1px 0px 8px rgba(0, 0, 0, 0.99);
 		-moz-box-shadow: -1px 0px 8px rgba(0, 0, 0, 0.99);
 		-webkit-box-shadow: -1px 0px 8px rgba(0, 0, 0, 0.99);
 		-webkit-user-select: none;
 	}
 .SubBtn:active{
-		background:-webkit-gradient(linear, left top, left bottom, from(#3c3c3c), to(darkGray));
+    background-image:linear-gradient(to top, darkGray, #3c3c3c);
 		border-top: none;
 		box-shadow: inset 0 0 6px #000;
 		text-shadow: #000 0px 1px 0px;
@@ -88,49 +80,27 @@ table.Calculator {
 
 /*------------ Black Buttons ----------------*/
 .SubBtn2{
-		background:-webkit-gradient(linear, left top, left bottom, from(#2b2b2b), to(#000));
+    background-image:linear-gradient(to top, #000, #2b2b2b);
 		font-size: 18.7px;
 		cursor: pointer;
 		letter-spacing: 1px;
 		color: #fff;
 		text-shadow: #000 0px -1px 0px;
-		-webkit-border-radius: 4px;
 		box-shadow: -1px 0px 8px rgba(0, 0, 0, 0.99);
 		-moz-box-shadow: -1px 0px 8px rgba(0, 0, 0, 0.99);
 		-webkit-box-shadow: -1px 0px 8px rgba(0, 0, 0, 0.99);
 		-webkit-user-select: none;
 	}
 .SubBtn2:active{
-		background:-webkit-gradient(linear, left top, left bottom, from(#171717), to(#2b2b2b));
+    background-image:linear-gradient(to top, #171717, #2b2b2b);
 		border-top: none;
 		box-shadow: inset 0 0 13px #000;
 		text-shadow: #000 0px 1px 0px;
 }
 
-/*------------- Brownish Buttons --------------*/
-.SubBtn3{
-		background:-webkit-gradient(linear, left top, left bottom, from(darkGray), to(#3c3c3c));
-		font-size: 18.7px;
-		cursor: pointer;
-		letter-spacing: 1px;
-		color: #fff;
-		text-shadow: #000 0px -1px 0px;
-		-webkit-border-radius: 4px;
-		box-shadow: -1px 0px 8px rgba(0, 0, 0, 0.99);
-		-moz-box-shadow: -1px 0px 8px rgba(0, 0, 0, 0.99);
-		-webkit-box-shadow: -1px 0px 8px rgba(0, 0, 0, 0.99);
-		-webkit-user-select: none;
-	}
-
 /*------------ Orange Buttons --------------*/
 .PrimaryBtn{
-		background: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.50, rgb(227,103,20)),
-		color-stop(0.90, rgb(254,156,91))
-		);
+    background-image:linear-gradient(to top, #e36714, #fe9c5b);
 		cursor: pointer;
 		letter-spacing: 1px;
 		color: #fff;
@@ -141,13 +111,7 @@ table.Calculator {
 	}
 .PrimaryBtn td{vertical-align: bottom}
 .PrimaryBtn:active{
-		background: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.90, rgb(227,103,20)),
-		color-stop(0.50, rgb(254,156,91))
-		);
+    background-image:linear-gradient(to top, #fe9c5b, #e36714);
 		box-shadow: none;
 		-moz-box-shadow: none;
 		-webkit-box-shadow: none;
