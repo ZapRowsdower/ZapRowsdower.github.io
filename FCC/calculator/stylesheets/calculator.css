@@ -66,6 +66,7 @@ table.Calculator {
 /*------------ Grey Buttons ---------------*/
 .SubBtn{
 		background:-webkit-gradient(linear, left top, left bottom, from(darkGray), to(#3c3c3c));
+    background-image: -ms-linear-gradient(left top, darkGray 0%, #3c3c3c 300%);
 		font-size: 18.7px;
 		cursor: pointer;
 		width: 60px;
