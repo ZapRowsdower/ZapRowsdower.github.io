@@ -1,0 +1,213 @@
+/*TODO: Add CSS animation somewhere on here to meet course requirements*/
+h1, h2, h3 {
+  color: #fff; }
+
+p {
+  color: #ccc; }
+
+a {
+  color: #ccc; }
+  a:hover {
+    color: #4c4c4c;
+    text-decoration: none; }
+
+section {
+  margin-bottom: 1%; }
+
+body {
+  background-color: #1b1f38;
+  /*padding top because navbar is fixed position and overlaps content*/
+  padding-top: 90px; }
+
+.outline {
+  display: none; }
+
+.container-fluid {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1b1f38+0,3f4c6b+100 */
+  background: #1b1f38;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #1b1f38 0%, #3f4c6b 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #1b1f38 0%, #3f4c6b 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #1b1f38 0%, #3f4c6b 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1b1f38', endColorstr='#3f4c6b',GradientType=0 );
+  /* IE6-9 */ }
+
+.sectionHeader {
+  margin-bottom: 3%; }
+
+.elem-center {
+  margin-left: 0 auto; }
+
+.moon {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  vertical-align: bottom;
+  margin-right: 1%;
+  background-color: #1f235d;
+  box-shadow: 0 0 90px 1px #f1f4ba;
+  transition: background-color 2s ease; }
+
+.right-shade {
+  background-color: #1f235d;
+  border-right-color: #ccc;
+  border-right-style: solid;
+  border-left-style: none; }
+
+.left-shade {
+  background-color: #ccc;
+  border-left-color: #1f235d;
+  border-left-style: solid;
+  border-right-style: none; }
+
+.navbar button.navbar-toggle {
+  margin-left: 1%;
+  margin-right: 4%;
+  padding: 5px; }
+
+.my-nav-style {
+  background-color: #1b1f38;
+  border-style: none;
+  text-align: center; }
+  .my-nav-style a {
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 0.05em; }
+
+.my-main-banner {
+  font-family: "HelveticaNeue-Thin", "Helvetica Neue Thin", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  margin-bottom: 1%;
+  margin-top: 1%;
+  padding-bottom: 1%; }
+  .my-main-banner h1 {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 200; }
+
+.txt-over-img {
+  background-color: rgba(0, 0, 0, 0.3);
+  min-height: inherit;
+  padding: 5%;
+  color: #fff; }
+  .txt-over-img a {
+    color: #00AAff; }
+    .txt-over-img a:hover {
+      color: #ccc; }
+
+.my-form input {
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: #1b1f38;
+  color: #fff;
+  border: none; }
+
+.my-form button {
+  margin: 0 auto;
+  padding: 10px;
+  font-size: 20px; }
+
+.my-portfolio-grid div {
+  margin-bottom: 2%; }
+
+.back-to-top-wrapper {
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1%; }
+  .back-to-top-wrapper span {
+    margin-left: 1%;
+    font-size: 24px;
+    color: #ccc; }
+
+.back-to-top {
+  color: #ccc;
+  padding: 0.5%;
+  font-size: 20px;
+  border-radius: 15%;
+  margin-left: auto;
+  margin-right: auto; }
+
+.list-social-media {
+  list-style: none;
+  text-align: center; }
+  .list-social-media li {
+    display: inline;
+    margin-right: 1%; }
+  .list-social-media i {
+    line-height: 50px; }
+
+.btn-round {
+  border-radius: 50%;
+  background-color: #fff;
+  color: #4c4c4c;
+  width: 50px;
+  height: 50px; }
+
+.footer-credits {
+  color: #ccc; }
+
+.my-text-shadow {
+  text-shadow: 1px 1px #4c4c4c; }
+
+/*override boostrap btn-primary style*/
+.btn-primary {
+  background-color: #006EFF; }
+
+/* Added to prevent my fixed position navbar from overlapping content when 'back to top' link is used */
+.top-target {
+  position: relative;
+  top: -250px;
+  visibility: hidden; }
+
+.fixed-background {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: bottom; }
+
+/* Small devices can't handle the bg-attachment fixed, so on those devices use 'scroll' */
+@media (max-width: 1024px) {
+  .fixed-background {
+    background-attachment: scroll; } }
+#about {
+  background-image: url("../img/milkyWayBlue.jpg"); }
+
+#portfolioNavBar {
+  background-color: transparent; }
+
+/*goofy fun with css hover events and such. trivial*/
+/*#moon>h3{
+  color: $brightBlue;
+  cursor: pointer;
+  position: relative;
+  left: 25%;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#moon:hover>h3{
+  opacity: 1;
+}
+
+#moon ~p#moonHelpText {
+  position: absolute;
+  left: 50%;
+  margin-left: -10%;
+  background-color: $black;
+  color: $white;
+  opacity: 0;
+  transition: opacity 1s ease;
+  padding: 1%;
+  z-index: 1;
+}*/
+/*#moon:hover ~p#moonHelpText{
+  opacity: 1;
+}*/
+
+/*# sourceMappingURL=jeeSiteNight.css.map */
