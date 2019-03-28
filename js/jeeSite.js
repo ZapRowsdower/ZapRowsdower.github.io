@@ -166,8 +166,8 @@ var homePage = (function () {
     //TODO: move to utility file
     // format date to mm/dd/yyyy for date param in api call
     today = today.getMonth()+1+"/"+today.getDate()+"/"+today.getFullYear();
-    //TODO: note the URL is NOT https and potentially insecure
-    var apiURL = "http://api.usno.navy.mil/rstt/oneday?date="+today+"&loc="+loc;
+
+    var apiURL = "https://api.usno.navy.mil/rstt/oneday?date="+today+"&loc="+loc;
 
     //ajax call to navy api to get moon phase
     $.ajax({
