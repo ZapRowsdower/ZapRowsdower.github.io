@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>FCC: Responsive Survey Form</title>
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+  <main class="main-content">
+    <h1 id="title">
+      Take this Survey!
+    </h1>
+    <hr>
+    <p id="description">
+      How's can we improve our waffle consumption experience?
+    </p>
+    <form id="survey-form">
+      <div class="form-row">
+        <label id="name-label" for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your full name" required />
+      </div>
+      <div class="form-row">
+        <label id="email-label" for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required />
+      </div>
+      <div class="form-row">
+        <label id="number-label" for="number">Age</label>
+        <input type="number" id="number" min="18" max="100" placeholder="Enter your age" />
+      </div>
+      <div class="form-row">
+        <label>Which waffle is best?</label>
+        <select id="dropdown">
+          <option value="Chocolate Chip">Chocolate Chip</option>
+          <option value="Almond">Almond</option>
+          <option value="Almond">Pecan</option>
+          <option value="Almond">Blueberry</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Would you eat our waffles again?</label>
+        <ul>
+          <li>
+            <input type="radio" name="eat-again" id="eat-again-y" value="yes">
+            <label for="eat-again-y">Yes</label>
+          </li>
+          <li>
+            <input type="radio" name="eat-again" id="eat-again-n" value="no">
+            <label for="eat-again-n">No</label>
+          </li>
+        </ul>
+      </div>
+      <div class="form-row">
+        <label>How did you hear about us?</label>
+        <ul>
+          <li>
+            <input type="checkbox" name="how-heard" id="how-heard-facebook" value="facebook">
+            <label for="how-heard-facebook">Facebook</label>
+          </li>
+          <li>
+            <input type="checkbox" name="how-heard" id="how-heard-wom" value="wom">
+            <label for="how-heard-wom">Word of mouth</label>
+          </li>
+          <li>
+            <input type="checkbox" name="how-heard" id="how-heard-eMail" value="eMail">
+            <label for="how-heard-eMail">eMail</label>
+          </li>
+        </ul>
+      </div>
+      <div class="form-row">
+        <label for="additional-comments">Please add any additional comments:</label>
+        <textarea id="additional-comments"></textarea>
+      </div>
+      <hr>
+      <button type="submit" id="submit">Submit</button>
+    </form>
+  </main>
+  <script src="js/index.js"></script>
+</body>
+
+</html>
