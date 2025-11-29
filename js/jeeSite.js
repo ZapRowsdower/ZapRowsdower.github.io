@@ -29,12 +29,21 @@
 
 		flickrNano('#photoPortfolio');
 
+		$('.navbar-fixed-top a, .back-to-top-wrapper a, .portfolio-nav').bind('click', function (event) {
+			//portfolio nav behavior for showing/hiding selected sections
+			if ($(this).hasClass("portfolio-nav")) {
+				$(".portfolio-section").hide();
+				$($(this).attr("href")).show();
+			}
+		});
+
 		//init bootstrap scrollspy for nav section highlighting behavior
 		//@ts-expect-error
 		$('body').scrollspy({
 			target: '.navbar',
 			offset: 160
 		});
+
 	} catch (error) {
 		console.error(error);
 	}
