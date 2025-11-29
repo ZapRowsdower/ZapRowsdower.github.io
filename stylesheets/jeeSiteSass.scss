@@ -2,6 +2,10 @@
 @import 'partials/_colors';
 @import 'partials/_mixins';
 
+:root {
+	scroll-behavior: smooth;
+}
+
 a {
 	color: $darkGrey;
 
