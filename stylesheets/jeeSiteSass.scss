@@ -223,11 +223,8 @@ body {
 	border: none;
 }
 
-/* Added to prevent my fixed position navbar from overlapping content when 'back to top' link is used */
 .top-target {
-	position: relative;
-	top: -250px;
-	visibility: hidden;
+	scroll-margin: 250px;
 }
 
 .fixed-background {

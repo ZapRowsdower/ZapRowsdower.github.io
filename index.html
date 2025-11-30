@@ -1,210 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Jonathan Ely's Web Portfolio</title>
-    <meta name="description" content="Jonathan Ely: User Experience Designer, Web Developer, Backpacker, Writer, Photographer. A geek that goes outside.">
-    <meta name="author" content="Jonathan Ely">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/nanogallery/5.10.0/css/themes/light/nanogallery_light.min.css">
-    <link rel="stylesheet" type="text/css" id="swapSheet" href="stylesheets/jeeSite.css">
-  </head>
-  <body>
-    <div class="container-fluid">
-      <!-- P tag used prevent my fixed position navbar from overlapping content when 'back to top' link is used -->
-      <header id="top" class="top-target">
-        <h1 class="outline nocontent">Jonathan Ely's Web Portfolio</h1>
-      </header>
-      <nav class="navbar navbar-default navbar-fixed-top my-nav-style" role="navigation">
-        <h2 class="outline nocontent">Top Navigation</h2>
-        <div class="container-fluid my-main-banner">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNavSmall">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a href="#top" target="_self" class="navbar-brand logo-nav">
-              <div class="moon"></div>
-              <h1>Jonathan Ely</h1>
-            </a>
-          </div>
-          <div id="mainNavSmall" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right hidden-xs">
-              <li>
-                <a href="#top">About</a>
-              </li>
-              <li>
-                <a href="#portfolio">Portfolio</a>
-              </li>
-              <li>
-                <a href="#contact">Contact</a>
-              </li>
-            </ul>
-            <ul class="nav my-navbar-inline visible-xs-block">
-              <li>
-                <a href="#top">About</a>
-              </li>
-              <li>
-                <a href="#portfolio">Portfolio</a>
-              </li>
-              <li>
-                <a href="#contact">Contact</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <section class="row lead text-left fixed-background" id="about">
-        <h2 class="outline nocontent">About Me Section</h2>
-        <article class="col-sm-5 txt-over-img">
-          <h3 class="my-text-shadow text-center">
-            I'm a geek that goes outside
-          </h3>
-          <p class="my-text-shadow">
-            I build <a href="#webPortfolio" data-target="#webPortfolio" class="portfolio-nav"><b>user experiences</b></a> which emphasize
-            user friendliness and workflow efficiency based on thorough research of user needs.
-          <p class="my-text-shadow">
-            I've walked across the country from Mexico to Canada on the 2,650 mile long Pacific Crest Trail and took a few <b><a href="#photoPortfolio" data-target="#photoPortfolio" class="portfolio-nav">pictures.</a></b>
-          </p>
-          <ul class="list-social-media">
-            <li>
-              <a href="https://www.linkedin.com/in/elyjonathan" title="Link to my LinkedIn profile" class="button social" target="_blank">
-                <i class="fa fa-linkedin fa-2x btn-round"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.flickr.com/photos/142772868@N08/" title="Link to my Flickr profile" class="button social" target="_blank">
-                <i class="fa fa-flickr fa-2x btn-round"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/ZapRowsdower" title="Link to my GitHub profile" class="button social" target="_blank">
-                <i class="fa fa-github fa-2x btn-round"></i>
-              </a>
-            </li>
-          </ul>
-        </article>
-      </section>
-      <section class="row" id="portfolio">
-        <h2 class="outline nocontent">Portfolio Section</h2>
-        <nav id="portfolioNavBar" title="My Portfolio" class="navbar navbar-default my-sub-nav-style">
-          <h3 class="sectionHeader">Portfolio</h3>
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#portfolioNav">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div id="portfolioNav" class="collapse navbar-collapse">
-            <div class="row">
-              <div class="col-xs-6">
-                <a href="#webPortfolio" class="portfolio-nav"><b aria-hidden="true">&lt;/&gt;</b><h4>Web Dev</h4></a>
-              </div>
-              <div class="col-xs-6">
-                <a href="#photoPortfolio" class="portfolio-nav"><i class="glyphicon glyphicon-camera"></i><h4>Photos</h4></a>
-              </div>
-            </div>
-          </div>
-        </nav>
-        <div id="photoPortfolio" class="portfolio-section"></div>
-		<div id="webPortfolio" class="portfolio-section">
-			<ul class="my-portfolio__list">
-				<li>
-					<a href="https://zaprowsdower.github.io/FCC/PomodoroClock/index.html" target="_blank">
-						<h5 class="media-label">Pomodoro &nbsp;<i class="fa fa-external-link">&nbsp;</i></h5>
-						<img class="img-responsive" src="img/pomodoro.jpg">
-					</a>
-				</li>
-				<li>
-					<a href="https://zaprowsdower.github.io/FCC/calculator/index.html" target="_blank">
-						<h5 class="media-label">Calculator &nbsp;<i class="fa fa-external-link">&nbsp;</i></h5>
-						<img class="img-responsive" src="img/calculator.jpg">
-					</a>
-				</li>
-				<li>
-					<a href="https://zaprowsdower.github.io/FCC/random_quote_machine/index.html" target="_blank">
-						<h5 class="media-label">Random Quote Machine &nbsp;<i class="fa fa-external-link">&nbsp;</i></h5>
-						<img class="img-responsive" src="img/random_quote.jpg">
-					</a>
-				</li>
-				<li>
-					<a href="https://zaprowsdower.github.io/FCC/local_weather/index.html" target="_blank">
-						<h5 class="media-label">Local Weather &nbsp;<i class="fa fa-external-link">&nbsp;</i></h5>
-						<img class="img-responsive" src="img/weather.jpg">
-					</a>
-				</li>
-				<li>
-					<a href="https://zaprowsdower.github.io/FCC/wikipedia_viewer/index.html" target="_blank">
-						<h5 class="media-label">Wikipedia Viewer &nbsp;<i class="fa fa-external-link">&nbsp;</i></h5>
-						<img class="img-responsive" src="img/wiki.jpg">
-					</a>
-				</li>
-			</ul>
-		</div>
-      </section>
-      <section class="row" id="contact">
-        <h2 class="outline nocontent">Contact Section</h2>
-        <h3 class="sectionHeader">Get In Contact</h3>
-        <div>
-          <p class="lead text-center">You can find me on LinkedIn</p>
-          <ul class="list-social-media">
-            <li>
-              <a href="https://www.linkedin.com/in/elyjonathan" title="Link to my LinkedIn profile" class="button social" target="_blank">
-                <i class="fa fa-linkedin fa-3x btn-round"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.flickr.com/photos/142772868@N08/" title="Link to my Flickr profile" class="button social" target="_blank">
-                <i class="fa fa-flickr fa-3x btn-round"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/ZapRowsdower" title="Link to my GitHub profile" class="button social" target="_blank">
-                <i class="fa fa-github fa-3x btn-round"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="outline nocontent">Contact Form</h4>
-          <form class="my-form">
-            <p class="lead text-center">...or you could try your luck with this thing:</p>
-            <input type="text" placeholder="Name" id="txtName">
-            <br>
-            <input type="email" placeholder="Email" id="txtEmail">
-            <br>
-            <input type="tel" placeholder="Phone" id="txtPhone">
-            <br>
-            <input type="text" placeholder="Message" id="txtMsg">
-            <div class="text-center">
-              <button type="submit" id="btnSubmit" class="btn btn-primary">
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
-      <div class="back-to-top-wrapper">
-        <a href="#top" target="_self">
-          <div class="back-to-top glyphicon glyphicon-triangle-top">
-          </div>
-          <span>Back to top</span>
-        </a>
-      </div>
-      <footer class="footer-credits text-center">
-        <span>Designed and built by Jonathan Ely &copy; 2026</span>
-      </footer>
-    </div>
-  </body>
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/nanogallery/5.10.0/jquery.nanogallery.min.js"></script>
-  <script src="js/jeeSite.js"></script>
-  <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<head>
+	<meta charset="utf-8">
+	<title>Jonathan Ely's Web Portfolio</title>
+	<meta name="description" content="Jonathan Ely: Web Developer, Backpacker, Photographer. A geek that goes outside.">
+	<meta name="author" content="Jonathan Ely">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+		integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css"
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/nanogallery/5.10.0/css/themes/light/nanogallery_light.min.css">
+	<link rel="stylesheet" type="text/css" id="swapSheet" href="stylesheets/jeeSite.css">
+</head>
+
+<body>
+	<div class="container-fluid">
+
+		<header id="top" class="top-target">
+			<h1 class="outline nocontent">Jonathan Ely's Web Portfolio</h1>
+			<nav class="navbar navbar-default navbar-fixed-top my-nav-style" role="navigation">
+				<h2 class="outline nocontent">Top Navigation</h2>
+				<div class="container-fluid my-main-banner">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+							data-target="#mainNavSmall">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a href="#top" target="_self" class="navbar-brand logo-nav">
+							<div class="moon"></div>
+							<h1>Jonathan Ely</h1>
+						</a>
+					</div>
+					<div id="mainNavSmall" class="collapse navbar-collapse">
+						<ul class="nav navbar-nav navbar-right hidden-xs">
+							<li>
+								<a href="#top">About</a>
+							</li>
+							<li>
+								<a href="#portfolio">Portfolio</a>
+							</li>
+							<li>
+								<a href="#contact">Contact</a>
+							</li>
+						</ul>
+						<ul class="nav my-navbar-inline visible-xs-block">
+							<li>
+								<a href="#top">About</a>
+							</li>
+							<li>
+								<a href="#portfolio">Portfolio</a>
+							</li>
+							<li>
+								<a href="#contact">Contact</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<main>
+			<section class="row lead text-left fixed-background" id="about">
+				<h2 class="outline nocontent">About Me Section</h2>
+				<article class="col-sm-5 txt-over-img">
+					<h3 class="my-text-shadow text-center">
+						I'm a geek that goes outside
+					</h3>
+					<p class="my-text-shadow">
+						I build <a href="#webPortfolio" data-target="#webPortfolio" class="portfolio-nav"><b>user
+								experiences</b></a> which emphasize
+						user friendliness and workflow efficiency based on thorough research of user needs.
+					<p class="my-text-shadow">
+						I've walked across the country from Mexico to Canada on the 2,650 mile long Pacific Crest Trail
+						and took a few <b><a href="#photoPortfolio" data-target="#photoPortfolio"
+								class="portfolio-nav">pictures.</a></b>
+					</p>
+					<ul class="list-social-media">
+						<li>
+							<a rel="noopener" href="https://www.linkedin.com/in/elyjonathan"
+								title="Link to my LinkedIn profile" class="button social" target="_blank">
+								<i class="fa fa-linkedin fa-2x btn-round"></i>
+							</a>
+						</li>
+						<li>
+							<a rel="noopener" href="https://www.flickr.com/photos/142772868@N08/"
+								title="Link to my Flickr profile" class="button social" target="_blank">
+								<i class="fa fa-flickr fa-2x btn-round"></i>
+							</a>
+						</li>
+						<li>
+							<a rel="noopener" href="https://github.com/ZapRowsdower" title="Link to my GitHub profile"
+								class="button social" target="_blank">
+								<i class="fa fa-github fa-2x btn-round"></i>
+							</a>
+						</li>
+					</ul>
+				</article>
+			</section>
+			<section class="row" id="portfolio">
+				<h2 class="outline nocontent">Portfolio Section</h2>
+				<nav id="portfolioNavBar" title="My Portfolio" class="navbar navbar-default my-sub-nav-style">
+					<h3 class="sectionHeader">Portfolio</h3>
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+						data-target="#portfolioNav">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div id="portfolioNav" class="collapse navbar-collapse">
+						<div class="row">
+							<div class="col-xs-6">
+								<a href="#webPortfolio" class="portfolio-nav"><b aria-hidden="true">&lt;/&gt;</b>
+									<h4>Web Dev</h4>
+								</a>
+							</div>
+							<div class="col-xs-6">
+								<a href="#photoPortfolio" class="portfolio-nav"><i
+										class="glyphicon glyphicon-camera"></i>
+									<h4>Photos</h4>
+								</a>
+							</div>
+						</div>
+					</div>
+				</nav>
+				<div id="photoPortfolio" class="portfolio-section"></div>
+				<div id="webPortfolio" class="portfolio-section">
+					<ul class="my-portfolio__list">
+						<li>
+							<a rel="noopener" href="https://zaprowsdower.github.io/FCC/PomodoroClock/index.html"
+								target="_blank">
+								<h5 class="media-label">Pomodoro &nbsp;<i class="fa fa-external-link">&nbsp;</i></h5>
+								<img alt="Screenshot of my Pomodoro app" class="img-responsive" src="img/pomodoro.jpg">
+							</a>
+						</li>
+						<li>
+							<a rel="noopener" href="https://zaprowsdower.github.io/FCC/calculator/index.html"
+								target="_blank">
+								<h5 class="media-label">Calculator &nbsp;<i class="fa fa-external-link">&nbsp;</i></h5>
+								<img alt="Screenshot of my calculator app" class="img-responsive"
+									src="img/calculator.jpg">
+							</a>
+						</li>
+						<li>
+							<a rel="noopener" href="https://zaprowsdower.github.io/FCC/random_quote_machine/index.html"
+								target="_blank">
+								<h5 class="media-label">Random Quote Machine &nbsp;<i
+										class="fa fa-external-link">&nbsp;</i></h5>
+								<img alt="Screenshot of my Random Quote app" class="img-responsive"
+									src="img/random_quote.jpg">
+							</a>
+						</li>
+						<li>
+							<a rel="noopener" href="https://zaprowsdower.github.io/FCC/local_weather/index.html"
+								target="_blank">
+								<h5 class="media-label">Local Weather &nbsp;<i class="fa fa-external-link">&nbsp;</i>
+								</h5>
+								<img alt="Screenshot of my Weather app" class="img-responsive" src="img/weather.jpg">
+							</a>
+						</li>
+						<li>
+							<a rel="noopener" href="https://zaprowsdower.github.io/FCC/wikipedia_viewer/index.html"
+								target="_blank">
+								<h5 class="media-label">Wikipedia Viewer &nbsp;<i class="fa fa-external-link">&nbsp;</i>
+								</h5>
+								<img alt="Screenshot of my Wiki app" class="img-responsive" src="img/wiki.jpg">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section class="row" id="contact">
+				<h2 class="outline nocontent">Contact Section</h2>
+				<h3 class="sectionHeader">Get In Contact</h3>
+				<div>
+					<p class="lead text-center">You can find me on LinkedIn</p>
+					<ul class="list-social-media">
+						<li>
+							<a rel="noopener" href="https://www.linkedin.com/in/elyjonathan"
+								title="Link to my LinkedIn profile" class="button social" target="_blank">
+								<i class="fa fa-linkedin fa-3x btn-round"></i>
+							</a>
+						</li>
+						<li>
+							<a rel="noopener" href="https://www.flickr.com/photos/142772868@N08/"
+								title="Link to my Flickr profile" class="button social" target="_blank">
+								<i class="fa fa-flickr fa-3x btn-round"></i>
+							</a>
+						</li>
+						<li>
+							<a rel="noopener" href="https://github.com/ZapRowsdower" title="Link to my GitHub profile"
+								class="button social" target="_blank">
+								<i class="fa fa-github fa-3x btn-round"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<h4 class="outline nocontent">Contact Form</h4>
+					<form class="my-form">
+						<p class="lead text-center">...or you could try your luck with this thing:</p>
+						<input type="text" placeholder="Name" id="txtName">
+						<br>
+						<input type="email" placeholder="Email" id="txtEmail">
+						<br>
+						<input type="tel" placeholder="Phone" id="txtPhone">
+						<br>
+						<input type="text" placeholder="Message" id="txtMsg">
+						<div class="text-center">
+							<button type="submit" id="btnSubmit" class="btn btn-primary">
+								Submit
+							</button>
+						</div>
+					</form>
+				</div>
+			</section>
+		</main>
+
+		<footer class="footer-credits text-center">
+			<div class="back-to-top-wrapper">
+				<a href="#top" target="_self">
+					<div class="back-to-top glyphicon glyphicon-triangle-top">
+					</div>
+					<span>Back to top</span>
+				</a>
+			</div>
+			<span>Designed and built by Jonathan Ely &copy; 2026</span>
+		</footer>
+
+	</div>
+</body>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+	crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nanogallery/5.10.0/jquery.nanogallery.min.js"></script>
+<script src="js/jeeSite.js"></script>
+<script async src="https://assets.codepen.io/assets/embed/ei.js"></script>
+
 </html>
