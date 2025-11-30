@@ -2,10 +2,6 @@
 @import 'partials/_colors';
 @import 'partials/_mixins';
 
-:root {
-	scroll-behavior: smooth;
-}
-
 a {
 	color: $darkGrey;
 
@@ -297,6 +293,12 @@ ul.my-portfolio__list {
 	}
 }
 
+@media (prefers-reduced-motion: no-preference) {
+	:root {
+		scroll-behavior: smooth;
+	}
+}
+
 @media (min-width: 1025px) {
 
 	// iOS safari can't handle the bg-attachment fixed, so enable for large screens
@@ -312,6 +314,7 @@ ul.my-portfolio__list {
 	ul.my-portfolio__list {
 		flex-direction: row;
 		flex-wrap: wrap;
+
 		li {
 			width: 48%;
 		}
