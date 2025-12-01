@@ -1,29 +1,42 @@
-@import 'partials/_typography';
-@import 'partials/_colors';
-@import 'partials/_mixins';
+@use 'partials/_mixins';
+
+:root {
+	--font-stack: "HelveticaNeue-Thin", "Helvetica Neue Thin", "Helvetica Neue", "Segoe UI", "Lucida Grande", Helvetica, Arial, sans-serif;
+	--color-moon-light: #ddd;
+	--color-moon-earthshine: #434DCC;
+	--color-moon-darkside: #1f235d;
+	--color-linked-in: #0077B5;
+	--color-font-cta: #0cf;
+	--color-font-base: #fff;
+	--color-font-base-inverse: #4c4c4c;
+	--color-surface-base: #fff;
+	--color-surface-base-darker: #efefef;
+	--color-surface-base-mid: #B3B3B3;
+	--color-surface-base-darkest: #4c4c4c;
+}
 
 a {
-	color: $darkGrey;
+	color: var(--color-font-base-inverse);
 
 	&:hover {
-		color: $brightBlue;
+		color: var(--color-font-cta);
 		text-decoration: none;
 	}
 }
 
 section {
 	margin-bottom: 1%;
-	border-bottom: 1px solid $nearWhite;
+	border-bottom: 1px solid var(--color-surface-base-darker);
 }
 
 body {
-	background-color: $nearWhite;
+	background-color: var(--color-surface-base-darker);
 	/*padding top because navbar is fixed position and overlaps content*/
 	padding-top: 80px;
 }
 
 .active {
-	border-bottom: 4px solid $darkGrey;
+	border-bottom: 4px solid var(--color-surface-base-darkest);
 }
 
 .outline {
@@ -32,8 +45,8 @@ body {
 
 .sectionHeader {
 	margin-bottom: 1%;
-	background-color: $midGrey;
-	color: $nearWhite;
+	background-color: var(--color-surface-base-mid);
+	color: var(--color-font-base);
 	padding: 1%;
 	text-align: center;
 }
@@ -48,28 +61,28 @@ body {
 	height: 60px;
 	border-radius: 50%;
 	vertical-align: bottom;
-	@include radial-gradient($lessDeepBlue, $deepBlue);
+	@include mixins.radial-gradient(var(--color-moon-earthshine), var(--color-moon-darkside));
 	transition: border 2s ease;
-	border-right: 18px solid $moonLight;
-	box-shadow: 0px 0px 0px 5px $nearWhite;
+	border-right: 18px solid var(--color-moon-light);
+	box-shadow: 0px 0px 0px 5px var(--color-surface-base-darker);
 }
 
 .before-half {
-	@include radial-gradient($lessDeepBlue, $deepBlue);
-	border-right-color: $moonLight;
+	@include mixins.radial-gradient(var(--color-moon-earthshine), var(--color-moon-darkside));
+	border-right-color: var(--color-moon-light);
 	border-right-style: solid;
 	border-left-style: none;
 }
 
 .after-half {
-	@include radial-gradient($moonLight, $grey);
-	border-left-color: $lessDeepBlue;
+	@include mixins.radial-gradient(var(--color-moon-light), #ccc);
+	border-left-color: var(--color-moon-earthshine);
 	border-left-style: solid;
 	border-right-style: none;
 }
 
 .my-nav-style {
-	background-color: $white;
+	background-color: var(--color-surface-base);
 	border-style: none;
 
 	a {
@@ -78,7 +91,7 @@ body {
 		letter-spacing: 0.05em;
 	}
 
-	box-shadow: 0 0 10px 1px $darkGrey;
+	box-shadow: 0 0 10px 1px var(--color-surface-base-darkest);
 }
 
 .my-sub-nav-style {
@@ -115,9 +128,9 @@ body {
 }
 
 .my-main-banner {
-	font-family: $helveticaNeueThin;
-	color: $darkGrey;
-	border-bottom: 2px solid $grey;
+	font-family: var(--font-stack);
+	color: var(--color-font-base-inverse);
+	border-bottom: 2px solid #ccc;
 
 	h1 {
 		display: inline-block;
@@ -134,13 +147,13 @@ body {
 	background-color: rgba(0, 0, 0, 0.3);
 	min-height: 100%;
 	padding: 5%;
-	color: $white;
+	color: var(--color-font-base);
 
 	a {
-		color: $brightBlue;
+		color: var(--color-font-cta);
 
 		&:hover {
-			color: $grey;
+			color: var(--color-font-base);
 		}
 	}
 }
@@ -169,13 +182,12 @@ body {
 	span {
 		margin-left: 1%;
 		font-size: 24px;
-		color: $grey;
 	}
 }
 
 .back-to-top {
-	background-color: $lightGrey;
-	color: $white;
+	background-color: var(--color-surface-base-darkest);
+	color: var(--color-font-base);
 	padding: 0.5%;
 	font-size: 20px;
 	border-radius: 15%;
@@ -200,23 +212,13 @@ body {
 
 .btn-round {
 	border-radius: 50%;
-	color: $white;
+	color: var(--color-font-base);
 	width: 50px;
 	height: 50px;
 }
 
-.footer-credits {
-	color: $grey;
-}
-
 .my-text-shadow {
-	text-shadow: 1px 1px $darkGrey;
-}
-
-/*override boostrap btn-primary style*/
-.btn-primary {
-	background-color: $brightBlue;
-	border: none;
+	text-shadow: 1px 1px var(--color-surface-base-darkest);
 }
 
 .top-target {
@@ -231,33 +233,25 @@ body {
 }
 
 .fa-flickr {
-	background-color: $black;
+	background-color: #000;
 }
 
 .fa-linkedin {
-	background-color: $linkedIn;
+	background-color: var(--color-linked-in)
 }
 
 .fa-github {
-	background-color: $white;
-	color: black;
+	background-color: var(--color-surface-base);
+	color: #000;
 }
 
 .media-label {
 	position: relative;
-	background-color: $darkGrey;
+	background-color: var(--color-surface-base-darkest);
 	top: 11px;
 	padding: 1%;
 	font-size: 18px;
-	color: $white;
-}
-
-.media-label_light {
-	position: relative;
-	background-color: $black;
-	top: 11px;
-	font-size: 12px;
-	color: $white;
+	color: var(--color-font-base);
 }
 
 #about {
@@ -299,7 +293,65 @@ ul.my-portfolio__list {
 	}
 }
 
+.portfolio-tabs__container {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(200px, 1fr));
+	grid-template-rows: auto 1fr;
+
+
+	details {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-template-rows: subgrid;
+		grid-column: 1 / -1;
+		grid-row: 1 / span 2;
+	}
+
+	details::details-content {
+		grid-row: 2;
+		/* position in the second row */
+		grid-column: 1 / -1;
+		/* cover all three columns */
+		padding: 1rem;
+	}
+
+	details:not([open])::details-content {
+		display: none;
+	}
+
+	summary {
+		grid-row: 1;
+		/* First subgrid row */
+		display: grid;
+		padding: 1rem;
+		/* Some breathing room */
+
+		cursor: pointer;
+		/* Update the cursor when hovered */
+	}
+
+	/* Style the <summary> element when <details> is [open] */
+	details[open] summary {
+		background-color: #0cf;
+		color: #fff;
+	}
+
+	summary {
+		grid-column: var(--tab-n) / span 1;
+	}
+
+	summary {
+		z-index: 1;
+	}
+}
+
 @media (min-width: 1025px) {
+
+	.portfolio-tabs__container {
+		column-gap: 1rem;
+		width: 80vw;
+		margin: 0 auto;
+	}
 
 	// iOS safari can't handle the bg-attachment fixed, so enable for large screens
 	.fixed-background {

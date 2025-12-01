@@ -108,74 +108,80 @@
 				<h2 class="outline nocontent">Portfolio Section</h2>
 				<nav id="portfolioNavBar" title="My Portfolio" class="navbar navbar-default my-sub-nav-style">
 					<h3 class="sectionHeader">Portfolio</h3>
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-						data-target="#portfolioNav">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<div id="portfolioNav" class="collapse navbar-collapse">
-						<div class="row">
-							<div class="col-xs-6">
-								<a href="#webPortfolio" class="portfolio-nav"><b aria-hidden="true">&lt;/&gt;</b>
-									<h4>Web Dev</h4>
-								</a>
+					<div id="portfolioNav" class="portfolio-tabs__container">
+						<details open name="portfolio-tabs" style="--tab-n: 1">
+							<summary>
+								<b aria-hidden="true">&lt;/&gt;</b>
+								<h4>Web Dev</h4>
+							</summary>
+
+							<div id="webPortfolio" class="portfolio-section">
+								<ul class="my-portfolio__list">
+									<li>
+										<a rel="noopener"
+											href="https://zaprowsdower.github.io/FCC/PomodoroClock/index.html"
+											target="_blank">
+											<h5 class="media-label">Pomodoro &nbsp;<i
+													class="fa fa-external-link">&nbsp;</i></h5>
+											<img alt="Screenshot of my Pomodoro app" class="img-responsive"
+												src="img/pomodoro.jpg">
+										</a>
+									</li>
+									<li>
+										<a rel="noopener"
+											href="https://zaprowsdower.github.io/FCC/calculator/index.html"
+											target="_blank">
+											<h5 class="media-label">Calculator &nbsp;<i
+													class="fa fa-external-link">&nbsp;</i></h5>
+											<img alt="Screenshot of my calculator app" class="img-responsive"
+												src="img/calculator.jpg">
+										</a>
+									</li>
+									<li>
+										<a rel="noopener"
+											href="https://zaprowsdower.github.io/FCC/random_quote_machine/index.html"
+											target="_blank">
+											<h5 class="media-label">Random Quote Machine &nbsp;<i
+													class="fa fa-external-link">&nbsp;</i></h5>
+											<img alt="Screenshot of my Random Quote app" class="img-responsive"
+												src="img/random_quote.jpg">
+										</a>
+									</li>
+									<li>
+										<a rel="noopener"
+											href="https://zaprowsdower.github.io/FCC/local_weather/index.html"
+											target="_blank">
+											<h5 class="media-label">Local Weather &nbsp;<i
+													class="fa fa-external-link">&nbsp;</i>
+											</h5>
+											<img alt="Screenshot of my Weather app" class="img-responsive"
+												src="img/weather.jpg">
+										</a>
+									</li>
+									<li>
+										<a rel="noopener"
+											href="https://zaprowsdower.github.io/FCC/wikipedia_viewer/index.html"
+											target="_blank">
+											<h5 class="media-label">Wikipedia Viewer &nbsp;<i
+													class="fa fa-external-link">&nbsp;</i>
+											</h5>
+											<img alt="Screenshot of my Wiki app" class="img-responsive"
+												src="img/wiki.jpg">
+										</a>
+									</li>
+								</ul>
 							</div>
-							<div class="col-xs-6">
-								<a href="#photoPortfolio" class="portfolio-nav"><i
-										class="glyphicon glyphicon-camera"></i>
-									<h4>Photos</h4>
-								</a>
-							</div>
-						</div>
+						</details>
+						<details class="nanoGallery" name="portfolio-tabs" style="--tab-n: 2">
+							<summary>
+								<i aria-hidden="true" class="glyphicon glyphicon-camera"></i>
+								<h4>Photos</h4>
+							</summary>
+							<div id="photoPortfolio" class="portfolio-section"></div>
+						</details>
+
 					</div>
 				</nav>
-				<div id="photoPortfolio" class="portfolio-section"></div>
-				<div id="webPortfolio" class="portfolio-section">
-					<ul class="my-portfolio__list">
-						<li>
-							<a rel="noopener" href="https://zaprowsdower.github.io/FCC/PomodoroClock/index.html"
-								target="_blank">
-								<h5 class="media-label">Pomodoro &nbsp;<i class="fa fa-external-link">&nbsp;</i></h5>
-								<img alt="Screenshot of my Pomodoro app" class="img-responsive" src="img/pomodoro.jpg">
-							</a>
-						</li>
-						<li>
-							<a rel="noopener" href="https://zaprowsdower.github.io/FCC/calculator/index.html"
-								target="_blank">
-								<h5 class="media-label">Calculator &nbsp;<i class="fa fa-external-link">&nbsp;</i></h5>
-								<img alt="Screenshot of my calculator app" class="img-responsive"
-									src="img/calculator.jpg">
-							</a>
-						</li>
-						<li>
-							<a rel="noopener" href="https://zaprowsdower.github.io/FCC/random_quote_machine/index.html"
-								target="_blank">
-								<h5 class="media-label">Random Quote Machine &nbsp;<i
-										class="fa fa-external-link">&nbsp;</i></h5>
-								<img alt="Screenshot of my Random Quote app" class="img-responsive"
-									src="img/random_quote.jpg">
-							</a>
-						</li>
-						<li>
-							<a rel="noopener" href="https://zaprowsdower.github.io/FCC/local_weather/index.html"
-								target="_blank">
-								<h5 class="media-label">Local Weather &nbsp;<i class="fa fa-external-link">&nbsp;</i>
-								</h5>
-								<img alt="Screenshot of my Weather app" class="img-responsive" src="img/weather.jpg">
-							</a>
-						</li>
-						<li>
-							<a rel="noopener" href="https://zaprowsdower.github.io/FCC/wikipedia_viewer/index.html"
-								target="_blank">
-								<h5 class="media-label">Wikipedia Viewer &nbsp;<i class="fa fa-external-link">&nbsp;</i>
-								</h5>
-								<img alt="Screenshot of my Wiki app" class="img-responsive" src="img/wiki.jpg">
-							</a>
-						</li>
-					</ul>
-				</div>
 			</section>
 			<section class="row" id="contact">
 				<h2 class="outline nocontent">Contact Section</h2>
@@ -202,24 +208,6 @@
 							</a>
 						</li>
 					</ul>
-				</div>
-				<div>
-					<h4 class="outline nocontent">Contact Form</h4>
-					<form class="my-form">
-						<p class="lead text-center">...or you could try your luck with this thing:</p>
-						<input type="text" placeholder="Name" id="txtName">
-						<br>
-						<input type="email" placeholder="Email" id="txtEmail">
-						<br>
-						<input type="tel" placeholder="Phone" id="txtPhone">
-						<br>
-						<input type="text" placeholder="Message" id="txtMsg">
-						<div class="text-center">
-							<button type="submit" id="btnSubmit" class="btn btn-primary">
-								Submit
-							</button>
-						</div>
-					</form>
 				</div>
 			</section>
 		</main>
